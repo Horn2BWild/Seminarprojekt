@@ -20,7 +20,13 @@ In comparison to ASICs the FPGA can be programmed for different applications aft
 \section{Hardware elements}
 In this section some important hardware elements are explained.
 \subsection{microprocessor}
-
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[width=10cm,keepaspectratio=true]{bilder/png/microprocessorblockdiagram}
+\caption{Internal structure of a microprocessor}
+\label{fig:microprocessorblockdiagram}
+\end{center}
+\end{figure}
 \subsubsection{ARM Cortex A9}
 \subsection{flip-flops}
 Flipflops are basic logic elements with 2 stable states. They consist of a data input and a clock input, as well as a data output. Optionally a set/reset-pin or an inverted output can be available. Fliipflops are used as memory elements. Simplified, a logical state at the data input is stored at the rising edge of the clock signal, and held stable to the output until the next rising edge occures. The most used flipflop is the D-flipflop.
