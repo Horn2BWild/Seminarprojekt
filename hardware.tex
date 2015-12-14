@@ -1,6 +1,7 @@
 \chapter{Hardware}
 \section{Hardware Designs}
 \subsection{ASIC - Application Specific Integrated Circuit}
+
 \subsection{FPGA - Field-Programmable Gate Array}
 In comparison to ASICs the FPGA can be programmed for different applications after delivery. The programming is done by combining a large number of logic blocks (CLB, LAB) and lookup tables (LUTs) through configurable bus connections. As FPGAs are reprogrammable, a design change in very late design phases is possible, even over remote connections. A general structure of a FPGA can be seen in figure \ref{fig:fpgablocksgeneral}. A FPGA is programmed using a HDL (see section \ref{kap:HDL}).
 \begin{figure}[htbp]
@@ -142,8 +143,16 @@ The propagation delay is the time the flipflop needs to change the output state 
 
 \subsubsection{clock signals}
 \subsubsection{clock generation}
-\paragraph{resonant circuit}
-
+\paragraph{resonant circuit\\}
+The most simple form of generating an oscillating signal is a circuit consisting of a capacitor, inductor and resistor. It oscillates due to the interaction of the magnetic field of the inductor and the electric field of the capacitor. When the capacitor is charged, current flows through the inductor building up a magnetic field. As the capacitor will be decharged the voltage decreases. The magnetic field is a maximum when the capacitor voltage reaches 0. Now the capacitor will start to charge with negative current increasing the electric field while the magnetic field decreases. The circuit starts to oscillate according to Faraday's law. The natural frequency of the oscillation can be determined using
+\begin{equation}
+f_0=2\pi\omega_0
+\end{equation}
+with
+\begin{equation}
+\omega_0=\frac{1}{\sqrt{LC}}
+\end{equation}
+RLC-circuits are used in many different applications, eg. for tuning radios or as frequency filters. The disadvantages of this type of resonator are the relatively low Q-factor and the fact that resonance frequency is not stable to temperature changes.
 \paragraph{crystal oscillator}
 
 \begin{figure}[htbp]
