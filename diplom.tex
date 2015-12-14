@@ -1,0 +1,211 @@
+%\documentclass[11pt, draft, oneside]{report}
+\documentclass[11pt]{report}
+%\makeindex
+%\usepackage{german,a4,showidx} %index an seite
+\usepackage{german,a4}
+%for pdfLaTeX output Bilder als .png speichern:
+\usepackage{listings}
+  \usepackage{courier}
+ \lstset{
+         basicstyle=\footnotesize\ttfamily, % Standardschrift
+         %numbers=left,               % Ort der Zeilennummern
+         numberstyle=\tiny,          % Stil der Zeilennummern
+         %stepnumber=2,               % Abstand zwischen den Zeilennummern
+         numbersep=5pt,              % Abstand der Nummern zum Text
+         tabsize=2,                  % Groesse von Tabs
+         extendedchars=true,         %
+         breaklines=true,            % Zeilen werden Umgebrochen
+         keywordstyle=\color{red},
+    		frame=b,         
+ %        keywordstyle=[1]\textbf,    % Stil der Keywords
+ %        keywordstyle=[2]\textbf,    %
+ %        keywordstyle=[3]\textbf,    %
+ %        keywordstyle=[4]\textbf,   \sqrt{\sqrt{}} %
+         stringstyle=\color{white}\ttfamily, % Farbe der String
+         showspaces=false,           % Leerzeichen anzeigen ?
+         showtabs=false,             % Tabs anzeigen ?
+         xleftmargin=17pt,
+         framexleftmargin=17pt,
+         framexrightmargin=5pt,
+         framexbottommargin=4pt,
+         %backgroundcolor=\color{lightgray},
+         showstringspaces=false      % Leerzeichen in Strings anzeigen ?        
+ }
+ \lstloadlanguages{% Check Dokumentation for further languages ...
+         %[Visual]Basic
+         %Pascal
+         %C
+         %C++
+         %XML
+         %HTML
+         Java
+ }
+    %\DeclareCaptionFont{blue}{\color{blue}} 
+
+  %\captionsetup[lstlisting]{singlelinecheck=false, labelfont={blue}, textfont={blue}}
+  \usepackage{caption}
+\DeclareCaptionFont{white}{\color{white}}
+\DeclareCaptionFormat{listing}{\colorbox[cmyk]{0.43, 0.35, 0.35,0.01}{\parbox{\textwidth}{\hspace{15pt}#1#2#3}}}
+\captionsetup[lstlisting]{format=listing,labelfont=white,textfont=white, singlelinecheck=false, margin=0pt, font={bf,footnotesize}}
+
+\usepackage{nomencl}
+\usepackage[pdftex]{graphicx}
+% f\"{u}r normales LaTeX->dvi, Bilder als .eps speichern:
+%\usepackage{graphicx} \DeclareGraphicsExtensions{.eps} \graphicspath{{bilder/eps/}}
+
+%Definition der Seitengr"osse
+\setlength{\textwidth}{15 true cm}
+\setlength{\textheight}{22 true cm}
+\oddsidemargin  0.5 cm
+\evensidemargin 0.5 cm
+\topmargin      0 cm
+
+\selectlanguage{english}
+%Beispiel fuer ein neues LaTex Kommando
+\newcommand{\QSIM}{{\sc QSim}}
+
+
+\renewcommand{\nomname}{Definitions}
+\setlength{\nomlabelwidth}{.50\hsize}
+\renewcommand{\nomlabel}[1]{#1 \dotfill}
+\setlength{\nomitemsep}{-\parsep}
+\makenomenclature
+
+
+\begin{document}
+\input{frontside}
+
+
+
+\newpage
+\selectlanguage{english}
+\vspace*{2.2 cm}
+{\Large
+\noindent
+{\bf Abstract}} \\
+\vspace*{0.3 cm}
+
+\noindent
+
+
+%\newpage
+
+
+%\selectlanguage{english}
+%\vspace*{2.2 cm}
+%{\Large
+%\noindent
+%{\bf STATUTORY DECLARATION}} \\
+%\vspace*{0.3 cm}
+
+%\noindent
+%I declare that I have authored this thesis independently, that I have not used other than the declared sources / resources, and that I have explicitly marked all material which has been quoted either literally or by %content from the used sources.
+%\vspace*{0.3 cm}
+
+%\vspace{2 cm}
+
+%\noindent ..............................\hfill ...........................................
+
+
+%\noindent date  \hfill (signature)
+
+
+\newpage
+\selectlanguage{english}
+%\newpage
+%\vspace*{2.2 cm}
+%{\Large
+%\noindent
+%{\bf Danksagung}} \\
+%\vspace*{0.3 cm}
+% OPTIONAL
+
+%\noindent
+%Diese Diplomarbeit wurde im (Studien)Jahr am Institut f\"{u}r
+%Technische Informatik an der Technischen Universit\"{a}t Graz
+%durchgef\"{u}hrt.
+
+%\smallskip
+%Danksagung an alle am Institut bzw. bei Firmen, die geholfen
+%haben....
+
+%\medskip
+%Danksagung an Freunde und Freundinnen f\"{u}r das Verst\"{a}ndnis, ebenso
+%den Eltern und allen sonstigen Sponsoren....
+
+%\vspace{2 cm}
+
+%
+%\noindent Graz, im Monat Jahr \hfill Name des Diplomanden
+
+\newpage
+% Inhaltsverzeichnis
+\tableofcontents  
+
+% Tabellenverzeichnis
+% OPTIONAL
+%
+
+
+
+
+\listoffigures 
+
+% Abbildungsverzeichnis
+% OPTIONAL
+%\listoftables
+
+%Seitennummerierung am Kopf inkl. Kapitel"uberschrift
+\pagestyle{headings}
+
+%---------------------------------------------------------------------------------------------------------
+%introduction
+%---------------------------------------------------------------------------------------------------------
+\input{introduction}
+
+%---------------------------------------------------------------------------------------------------------
+%hardware
+%---------------------------------------------------------------------------------------------------------
+\input{hardware}
+
+%---------------------------------------------------------------------------------------------------------
+%programming
+%---------------------------------------------------------------------------------------------------------
+\input{programming}
+
+
+%---------------------------------------------------------------------------------------------------------
+%conclusion
+%---------------------------------------------------------------------------------------------------------
+\input{conclusion}
+
+
+
+
+
+\begin{appendix}
+%\input{a_text}
+\input{nomenclature}
+%\section{z.B. Verwendete Symbole}
+%\input{a_files}
+\end{appendix}
+
+%nicht referenzierte Literaturstellen
+
+%\nocite{mseifter88,pmandl97,weiss92,weiss92a,ginthoer93}
+
+% Literaturverzeichnis einbinden, alpha, plain, unsrt, abbrv
+\newpage
+%Eintrag im Inhaltsverzeichnis
+\addtocounter{page}{1}
+\addcontentsline{toc}{chapter}{Bibliography}
+\addtocounter{page}{-1}
+
+\bibliographystyle{alpha}
+
+\bibliography{diplom}
+
+%Index File
+%\input{diplom.ind}
+
+\end{document}

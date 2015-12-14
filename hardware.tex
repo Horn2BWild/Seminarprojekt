@@ -1,0 +1,174 @@
+\chapter{Hardware}
+\section{Hardware Designs}
+\subsection{ASIC - Application Specific Integrated Circuit}
+\subsection{FPGA - Field-Programmable Gate Array}
+In comparison to ASICs the FPGA can be programmed for different applications after delivery. The programming is done by combining a large number of logic blocks (CLB, LAB) and lookup tables (LUTs) through configurable bus connections. As FPGAs are reprogrammable, a design change in very late design phases is possible, even over remote connections. A general structure of a FPGA can be seen in figure \ref{fig:fpgablocksgeneral}. A FPGA is programmed using a HDL (see section \ref{kap:HDL}).
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[width=14cm,keepaspectratio=true]{bilder/png/fpgablocksgeneral}
+\caption{Internal design of FPGAs}
+\label{fig:fpgablocksgeneral}
+\end{center}
+\end{figure}
+\subsubsection{logic blocks}
+
+\subsubsection{Look-up tables}
+\subsection{System on Chip}
+\subsection{Microprocessor system}
+
+\section{Hardware elements}
+In this section some important hardware elements are explained.
+\subsection{microprocessor}
+
+\subsubsection{ARM Cortex A9}
+\subsection{flip-flops}
+Flipflops are basic logic elements with 2 stable states. They consist of a data input and a clock input, as well as a data output. Optionally a set/reset-pin or an inverted output can be available. Fliipflops are used as memory elements. Simplified, a logical state at the data input is stored at the rising edge of the clock signal, and held stable to the output until the next rising edge occures. The most used flipflop is the D-flipflop.
+\begin{itemize}
+\item RS-flipflop\\
+The RS-flipflop, which can be seen in figure \ref{fig:rsflipflop}, is the most simple form of a flipflop. It consists of a set and a reset input. The state change is asynchrously and therefore not depending on rising clock edges. 
+
+\begin{table}
+\begin{center}
+\begin{tabular}{|c|c||c|}
+\hline
+S &  R & $Q_{t+1}$\\
+\hline\hline
+0 & 0 & $Q_{t}$\\
+\hline
+0 & 1 & 0\\
+\hline
+1 & 0 & 1\\
+\hline
+1 & 1 & undefined\\
+\hline
+\end{tabular}
+\caption{Input/Output states of a RS-flipflop}
+\label{tab:rsstates}
+\end{center}
+\end{table}
+
+The different state transitions of a RS-flipflop are listed in table \ref{tab:rsstates}. As long as the R and S bits are set to low state the output is held constant at the previous state. When the reset bit is set the output is changed to 0, when the set bit is set to 1, Q changes to 1. When R as well as S are both set, the output is simultaneously forced to get low and high. In this metastable state the next state is undefined and is dependent on factoring characterizations.
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[width=2cm,keepaspectratio=true]{bilder/png/RSflipflop}
+\caption{RS-flipflop}
+\label{fig:rsflipflop}
+\end{center}
+\end{figure}
+\item RES-flipflop\\
+In addition to the simple RS-flipflop this type has an enable input. This causes state changes to only occur when the enable bit is set. The advantage of this configuration is that state changes due to inconsistencies on the input lines. Even though the RES-flipflop has an enable pin it is still an asynchronous device.
+\item JK-flipflop\\
+The JK-flipflop (shown in figure \ref{fig:jkflipflop} is like a universal flipflop. It can be configured as RS-flipflop D-flipflop as well as a T-flipflop. The state transitions can be found in table \ref{tab:jkstates}. The transitions are like the RS transitions, but as difference the J=K=1 state is interpreted as toggle state.
+
+\begin{table}
+\begin{center}
+\begin{tabular}{|c|c||c|}
+\hline
+J &  K & $Q_{t+1}$\\
+\hline\hline
+0 & 0 & $Q_{t}$\\
+\hline
+0 & 1 & 0\\
+\hline
+1 & 0 & 1\\
+\hline
+1 & 1 & toggle\\
+\hline
+\end{tabular}
+\caption{Input/Output states of a JK-flipflop}
+\label{tab:jkstates}
+\end{center}
+\end{table}
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[width=2cm,keepaspectratio=true]{bilder/png/JKflipflop}
+\caption{JK-flipflop}
+\label{fig:jkflipflop}
+\end{center}
+\end{figure}
+\item T-flipflop\\
+The T-flipflop as shown in figure \ref{fig:tflipflop} performs no state transition as long as the T-input is set low. When it is set to 1 the flipflop starts to toggle, the next state will be set to the inverse of the current state, corresponding to the clock rate. The state transitions are listed in table \ref{tab:tstates}.
+\begin{table}
+\begin{center}
+\begin{tabular}{|c||c|}
+\hline
+T & $Q_{t+1}$\\
+\hline\hline
+0  & $Q_{t}$\\
+\hline
+1  & $\overline{Q_{t}}$\\
+\hline
+\end{tabular}
+\caption{Input/Output states of a T-flipflop}
+\label{tab:tstates}
+\end{center}
+\end{table}
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[width=2cm,keepaspectratio=true]{bilder/png/Tflipflop}
+\caption{T-flipflop}
+\label{fig:tflipflop}
+\end{center}
+\end{figure}
+\item D-flipflop\\
+The D-flipflop is the most used flipflop.It can be seen in figure \ref{fig:dflipflop}. The D-flipflop reads the D input at the rising edge of the clock and is therefore a synchronous device. The output is set to the D input at the rising edge and held stable at any other time. In this way the D-flipflop can be seen as simple memory cell
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[width=2cm,keepaspectratio=true]{bilder/png/Dflipflop}
+\caption{D-flipflop}
+\label{fig:dflipflop}
+\end{center}
+\end{figure}
+\end{itemize}
+\subsubsection{timing properties}
+When using flip-flops some timing parameters are important (seen in figure \ref{fig:flipfloptiming}) and explained below.
+\begin{itemize}
+\item setup time $t_{S}$\\
+The setup time is the time the input signal has to be hold constant before the rising clock of the edge occurs to sample the input reliable, using synchronous devices.
+\item hold time $t_{H}$\\
+THe hold time is the duration the input signal has to be hold stable after the rising clock edge occured for a reliable input sampling. $t_{H}$ is a property of synchronous flipflops.
+\item recovery time\\
+The recovery time is like $t_{S}$ for asynchronous flipflops. This is applied, because not every short signal change should have impact on the output. 
+\item removal time\\
+The removal time is like the hold time for asynchronous devices.
+\item propagation delay $t_{P}$, $t_{CO}$\\
+The propagation delay is the time the flipflop needs to change the output state after the rising clock edge occured. In some cases the delay times for low-to-high transition is not equal the high-to-low transition time. The propagation delay times are denoted in the datasheets. For correct operation of the flipflop the clock time has to be lower than $t_{S}+t_{H}$.
+\end{itemize}
+\subsection{memory}
+\subsubsection{SDRAM}
+\subsubsection{DDR-SDRAM}
+\subsection{clock}
+
+\subsubsection{clock signals}
+\subsubsection{clock generation}
+\paragraph{resonant circuit}
+
+\paragraph{crystal oscillator}
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[width=1.5cm,keepaspectratio=true]{bilder/png/crystaloscillatorsymbol}
+\caption{IEC symbol of an oscillator}
+\label{fig:crystaloscillatorsymbol}
+\end{center}
+\end{figure}
+\paragraph{phase-locked loop}
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[width=12cm,keepaspectratio=true]{bilder/png/PLLblocks}
+\caption{Block diagram of a PLL}
+\label{fig:pllblocks}
+\end{center}
+\end{figure}
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[width=6cm,keepaspectratio=true]{bilder/png/PLLphase}
+\caption{Phase diagram of a PLL}
+\label{fig:pllphase}
+\end{center}
+\end{figure}
+
+\subsection{bus technology}
+
+\section{Criticallink MitySOM SoC}
