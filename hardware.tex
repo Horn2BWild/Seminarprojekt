@@ -14,6 +14,24 @@ In comparison to ASICs the FPGA can be programmed for different applications aft
 \subsubsection{logic blocks}
 
 \subsubsection{Look-up tables}
+\subsubsection{SRAM-based devices}
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[width=10cm,keepaspectratio=true]{bilder/png/SRAMaufbau}
+\caption{Design of a SRAM memory cell\cite{Core16}}
+\label{fig:SRAMaufbau}
+\end{center}
+\end{figure}
+\subsubsection{antifuse-based devices}
+\subsubsection{flash-based devicees}
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[width=10cm,keepaspectratio=true]{bilder/png/FlashTransistor}
+\caption{A floating-gate transistor used in flash memory\cite{Core16}}
+\label{fig:FlashTransistor}
+\end{center}
+\end{figure}
+\subsubsection{hybrid systems}
 \subsection{System on Chip}
 \subsection{Microprocessor system}
 
@@ -143,6 +161,7 @@ The removal time is like the hold time for asynchronous devices.
 The propagation delay is the time the flipflop needs to change the output state after the rising clock edge occured. In some cases the delay times for low-to-high transition is not equal the high-to-low transition time. The propagation delay times are denoted in the datasheets. For correct operation of the flipflop the clock time has to be lower than $t_{S}+t_{H}$.
 \end{itemize}
 \subsection{memory}
+
 \subsubsection{SDRAM}
 \subsubsection{DDR-SDRAM}
 \subsection{clock}
