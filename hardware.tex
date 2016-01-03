@@ -15,6 +15,7 @@ In comparison to ASICs the FPGA can be programmed for different applications aft
 
 \subsubsection{Look-up tables}
 \subsubsection{SRAM-based devices}
+
 \begin{figure}[htbp]
 \begin{center}
 \includegraphics[width=10cm,keepaspectratio=true]{bilder/png/SRAMaufbau}
@@ -24,7 +25,7 @@ In comparison to ASICs the FPGA can be programmed for different applications aft
 \end{figure}
 \subsubsection{antifuse-based devices}
 Antifuse-based devices are OTP. The programming is done with special programming devices. For manufacturing those devices special materials, eg. non-conducting amorphous silicon, are used.\cite{Zeif2011} When antifuse-based devices are programmed, conducting channels are made by high voltage. This can be seen in figure \ref{fig:antifusevorhernachher}. So when antifuse-based FPGAs are programmed the configuration is permanent. This leads to the fact that the configuration of the device is non-volatile and available at power-on. The configuration can be hidden due to special security antifuses. Due to the fact that the device is OTP, no additional memory is needed to store the configuration. The disadvantage of this device is that it can be programmed only once and so it is not suitable for prototyping or changing configurations. Furthermore the programming can only be done off-line.\\
-Antifuse-based configurations are radiation hard and therefore suitable for military or space environments.\cite{Maxfield2009} It must be pointed out, that only the configuration is naturally radiation hard, and attached components have to be made radiation hard as well.
+Antifuse-based configurations are radiation hard and therefore suitable for military or space environments.\cite{Maxfield2009} It must be pointed out, that only the configuration is naturally radiation hard, and attached components have to be made radiation hard (shielding, TRD) as well.
 \begin{figure}[htbp]
 \begin{center}
 \includegraphics[width=10cm,keepaspectratio=true]{bilder/png/antifusevorhernachher}
