@@ -34,9 +34,13 @@ Antifuse-based configurations are radiation hard and therefore suitable for mili
 \end{center}
 \end{figure}
 \subsubsection{flash-based devices}
+Flash-based devices can be electrically programmed and erased, so that they can be configured over and over again. This can be done offline or online via special programming interfaces (in-circuit programmable). The memory is non-volatile and so the configuration can be stored even after power-off. As disadvantages the relatively high static power consumption\cite{Qui16} as well as device altering due to programming cycles have to bementioned. Flash-based devices contain a large number of flash-cells, which use two floating-gate transistors for storing data. A floating-gate transistor can be seen in figure \ref{fig:FlashTransistor}\\
+\textit{The floating-gate is isolated, insulated all around by an oxide layer, with no electrical contacts. This means that any electrons placed on the floating-gate are literally trapped until removed. This persistence is the foundation for using flash memory as storage.}\cite{Flash16}\\
+A detailed description of the operating of floating-gate transistors can be found at \cite{Cse16}.\\
+
 \begin{figure}[htbp]
 \begin{center}
-\includegraphics[width=10cm,keepaspectratio=true]{bilder/png/FlashTransistor}
+\includegraphics[width=7cm,keepaspectratio=true]{bilder/png/FlashTransistor}
 \caption{A floating-gate transistor used in flash memory\cite{Core16}}
 \label{fig:FlashTransistor}
 \end{center}
