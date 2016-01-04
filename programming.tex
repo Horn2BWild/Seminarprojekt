@@ -1,5 +1,13 @@
-\chapter{Hardware Description Languages}
+\chapter{Hardware Description Languages}\label{kap:HDL}
 
+\subsubsection{VHDL}
+The \textit{Very high-speed integrated circuit Hardware Description Language} is a HDL originally developed by the US Department of Defense to document the behaviour of an ASIC. It describes logical models and electrical circuits using text files and is standardised in IEEE 1076.
+SOME MORE 
+\subsubsection{Verilog}
+Verilog is another text-based HDL standardised in IEEE 1364. 
+SOME MORE
+\section{Differences between HDLs and Computer Programming Languages}
+HDLs differ from computer programming languages like C or Java in that case, that HDLs have possibilities to describe signal strength and propagation delays of signals. As CPLs have only sequential descriptions of algorithms, HDLs also model algorithms in concurrent matter. In HDLs two types of assignments exist, which are the blocking operator \textit{=} as well as the non-blocking assignment \textit{<=}.
 \section{Abstraction Levels}
 The purpose of using different abstraction levels is to hide details which are not essential for the current view of the problem. Information that is not important is hidden in higher levels of abstraction. The different abstraction levels of HDLs are shown in figure \ref{fig:hdlabstractionlevels}.
 \begin{figure}[htbp]
@@ -18,6 +26,7 @@ One step down from the behavioural level the register-transfer level is used. Th
 The logical level, sometimes also called gate level, represents the system as netlist with storage elements and logic gates (AND, NOR, ...). The representation is done using logical links with technology-specific timing properties. Signals have only discrete logical values. In most cases the generation fo the gate netlist is done using automated synthesis tools.
 \subsection{Layout Level}
 To fabricate the design to a physical chip the logic level model has to be transferred to a physical model, where the exact geometric placement and the topology placement of the system has to be defined. During this process every gate and storage element is transferred to layers of metal, silicon, contacts etc.\cite{Cey96} In this level the length of wires connecting the gates can be converted proportional to propagation delays. This should be considerated for timing issues according to the clock rate.
-\label{kap:HDL}
-\subsection{VHDL}
-\subsection{Verilog}
+\section{Basic Concepts of VHDL}
+\subsubsection{entity}
+\subsubsection{architecture}
+\subsubsection{signal}
