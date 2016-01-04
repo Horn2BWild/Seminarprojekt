@@ -1,4 +1,5 @@
-\chapter{Hardware Description Languages}\label{kap:HDL}
+\chapter{Hardware Description Languages}
+\label{kap:HDL}
 
 \subsubsection{VHDL}
 The \textit{Very high-speed integrated circuit Hardware Description Language} is a HDL originally developed by the US Department of Defense to document the behaviour of an ASIC. It describes logical models and electrical circuits using text files and is standardised in IEEE 1076.
@@ -7,7 +8,8 @@ SOME MORE
 Verilog is another text-based HDL standardised in IEEE 1364. 
 SOME MORE
 \section{Differences between HDLs and Computer Programming Languages}
-HDLs differ from computer programming languages like C or Java in that case, that HDLs have possibilities to describe signal strength and propagation delays of signals. As CPLs have only sequential descriptions of algorithms, HDLs also model algorithms in concurrent matter. In HDLs two types of assignments exist, which are the blocking operator \textit{=} as well as the non-blocking assignment \textit{<=}.
+HDLs differ from computer programming languages like C or Java in that case, that HDLs have possibilities to describe signal strength and propagation delays of signals. As CPLs have only sequential descriptions of algorithms, HDLs also model algorithms in concurrent matter.\\
+In HDLs two types of assignments exist, which are the blocking operator = as well as the non-blocking assignment \textless=. Blocking assignments are evaluated and assigned in one single step, in which the execution flow of the procedure is blocked until the assignment is completed. The non-blocking assignment evaluates the right-hand side immediately while the left-hand side is postponed until other evaluation steps in this time step are completed. The execution flow continues in that case.\cite{Sut96}
 \section{Abstraction Levels}
 The purpose of using different abstraction levels is to hide details which are not essential for the current view of the problem. Information that is not important is hidden in higher levels of abstraction. The different abstraction levels of HDLs are shown in figure \ref{fig:hdlabstractionlevels}.
 \begin{figure}[htbp]
