@@ -15,7 +15,9 @@ It must be pointed out, that hardware descriptions in the behavioural level are 
 \subsubsection{Register-Transfer Level}
 One step down from the behavioural level the register-transfer level is used. The system complexity is broken down to combinational logic and storage elements like registers. The transfer of data between registers is defined. An explicit clock is defined, and transitions only occur in defined clock cycles. Furthermore storage elements (flip-flops) are controlled by clock cycles. The RTL is fully synthesizable.\cite{Ver16}\cite{Asic14}
 \subsubsection{Logical Level}
+The logical level, sometimes also called gate level, represents the system as netlist with storage elements and logic gates (AND, NOR, ...). The representation is done using logical links with technology-specific timing properties. Signals have only discrete logical values. In most cases the generation fo the gate netlist is done using automated synthesis tools.
 \subsubsection{Layout Level}
+To fabricate the design to a physical chip the logic level model has to be transferred to a physical model, where the exact geometric placement and the topology placement of the system has to be defined. During this process every gate and storage element is transferred to layers of metal, silicon, contacts etc.\cite{Cey96} In this level the length of wires connecting the gates can be converted proportional to propagation delays. This should be considerated for timing issues according to the clock rate.
 \label{kap:HDL}
 \subsection{VHDL}
 \subsection{Verilog}
