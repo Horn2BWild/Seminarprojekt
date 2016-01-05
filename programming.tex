@@ -1,6 +1,7 @@
 \chapter{Hardware Description Languages}
 \label{kap:HDL}
-
+When the integrated circuit was invented only a few transistors had to be placed on a single chip. The design and placement of the transistors was done manually. With increasing technology transistors became smaller and more could be place on one chip. The integration became more complex, and designing a chip manually was not suitable any more. The solution for this problem was the development of so called \textit{Hardware Description Languages}.\\
+The purpose of those languages was to create text-based descriptions of electric circuits and synthesizing them automatically with predefined databases to a hardware layout. In the 1980s Verilog and VHDL were released, which are the two most popular HDLs.
 \subsubsection{VHDL}
 The \textit{Very high-speed integrated circuit Hardware Description Language} is a HDL originally developed by the US Department of Defense to document the behaviour of an ASIC. It describes logical models and electrical circuits using text files and is standardised in IEEE 1076.
 SOME MORE 
@@ -28,7 +29,8 @@ One step down from the behavioural level the register-transfer level is used. Th
 The logical level, sometimes also called gate level, represents the system as netlist with storage elements and logic gates (AND, NOR, ...). The representation is done using logical links with technology-specific timing properties. Signals have only discrete logical values. In most cases the generation fo the gate netlist is done using automated synthesis tools.
 \subsection{Layout Level}
 To fabricate the design to a physical chip the logic level model has to be transferred to a physical model, where the exact geometric placement and the topology placement of the system has to be defined. During this process every gate and storage element is transferred to layers of metal, silicon, contacts etc.\cite{Cey96} In this level the length of wires connecting the gates can be converted proportional to propagation delays. This should be considerated for timing issues according to the clock rate.
-\section{Basic Concepts of VHDL}
+\section{Basic Components of VHDL}
+
 \subsubsection{entity}
 \subsubsection{architecture}
 \subsubsection{signal}
