@@ -30,7 +30,4 @@ The logical level, sometimes also called gate level, represents the system as ne
 \subsection{Layout Level}
 To fabricate the design to a physical chip the logic level model has to be transferred to a physical model, where the exact geometric placement and the topology placement of the system has to be defined. During this process every gate and storage element is transferred to layers of metal, silicon, contacts etc.\cite{Cey96} In this level the length of wires connecting the gates can be converted proportional to propagation delays. This should be considerated for timing issues according to the clock rate.
 \section{Basic Components of VHDL}
-
-\subsubsection{entity}
-\subsubsection{architecture}
-\subsubsection{signal}
+There are three basic VHDL elements. The \textit{architecture} describes the interfaces of the model. It can be compared with a single chip of a whole system. The number and naming of the interfaces is done using the \ŧextit{port}-statement and has to be unique. The \textit{entity} describes the algorithm of the system. Each entity has to be related to at least one architecture. To exchange information between blocks the \textit{signal}-statement is used, but it is not possible to exchange information between different architectures. For more information on VHDL-elements see \cite{
