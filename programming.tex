@@ -4,10 +4,59 @@ When the integrated circuit was invented only a few transistors had to be placed
 The purpose of those languages was to create text-based descriptions of electric circuits and synthesizing them automatically with predefined databases to a hardware layout. In the 1980s Verilog and VHDL were released, which are the two most popular HDLs.
 \subsubsection{VHDL}
 The \textit{Very high-speed integrated circuit Hardware Description Language} is a HDL originally developed by the US Department of Defense to document the behaviour of an ASIC. It describes logical models and electrical circuits using text files and is standardised in IEEE 1076.
-SOME MORE 
+\lstset{language=VHDL, tabsize=4}
+\begin{center}
+  \begin{tikzpicture}
+  \node [fill=codebgcolor]
+  {{
+        \begin{tabular}{l}
+\begin{lstlisting}
+entity FullAdder is
+	port (a, b, ci: in std_logic;
+		s, co: out std_logic;
+	);
+end FullAdder;
+
+architecture behaviour of FullAdder is
+begin
+	process (a, b, ci)
+	begin
+		s <= a xor b xor ci;
+		co <= (b and ci) or (a and ci) or (a and b);
+	end process;
+end behaviour;
+  }
+}
+\end{lstlisting}
+        \end{tabular}
+      }};
+  \end{tikzpicture}
+\end{center}
 \subsubsection{Verilog}
 Verilog is another text-based HDL standardised in IEEE 1364. 
-SOME MORE
+\lstset{language=Verilog, tabsize=4}
+\begin{center}
+  \begin{tikzpicture}
+  \node [fill=codebgcolor]
+  {{
+        \begin{tabular}{l}
+\begin{lstlisting}
+module FullAdder(a, b, ci, s, co);
+	input a, b, ci;
+	output s, co;
+	reg s, co;
+	
+	always @ (*)
+	begin
+		s <= a ^ b ^ ci;;
+		co <= (b & ci) | (a & ci) | (a & b);
+	end
+endmodule
+\end{lstlisting}
+        \end{tabular}
+      }};
+  \end{tikzpicture}
+\end{center}
 \section{Differences between HDLs and Computer Programming Languages}
 HDLs differ from computer programming languages like C or Java in that case, that HDLs have possibilities to describe signal strength and propagation delays of signals. As CPLs have only sequential descriptions of algorithms, HDLs also model algorithms in concurrent matter.\\
 In HDLs two types of assignments exist, which are the blocking operator = as well as the non-blocking assignment \textless=. Blocking assignments are evaluated and assigned in one single step, in which the execution flow of the procedure is blocked until the assignment is completed. The non-blocking assignment evaluates the right-hand side immediately while the left-hand side is postponed until other evaluation steps in this time step are completed. The execution flow continues in that case.\cite{Sut96}
