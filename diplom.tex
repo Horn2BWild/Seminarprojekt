@@ -8,7 +8,7 @@
   \usepackage{courier}
  \lstset{
          basicstyle=\footnotesize\ttfamily, % Standardschrift
-         %numbers=left,               % Ort der Zeilennummern
+         numbers=left,               % Ort der Zeilennummern
          numberstyle=\tiny,          % Stil der Zeilennummern
          %stepnumber=2,               % Abstand zwischen den Zeilennummern
          numbersep=5pt,              % Abstand der Nummern zum Text
@@ -16,7 +16,7 @@
          extendedchars=true,         %
          breaklines=true,            % Zeilen werden Umgebrochen
          keywordstyle=\color{red},
-    		frame=b,         
+    	%	frame=b,         
  %        keywordstyle=[1]\textbf,    % Stil der Keywords
  %        keywordstyle=[2]\textbf,    %
  %        keywordstyle=[3]\textbf,    %
@@ -28,7 +28,7 @@
          framexleftmargin=17pt,
          framexrightmargin=5pt,
          framexbottommargin=4pt,
-         %backgroundcolor=\color{lightgray},
+        % backgroundcolor=\color{lightgray},
          showstringspaces=false      % Leerzeichen in Strings anzeigen ?        
  }
  \lstloadlanguages{% Check Dokumentation for further languages ...
@@ -38,7 +38,8 @@
          %C++
          %XML
          %HTML
-         Java
+         VHDL,
+         Verilog
  }
     %\DeclareCaptionFont{blue}{\color{blue}} 
 
@@ -70,10 +71,9 @@
 \renewcommand{\nomlabel}[1]{#1 \dotfill}
 \setlength{\nomitemsep}{-\parsep}
 \makenomenclature
+
 \usepackage{tikz}
 \definecolor{codebgcolor}{HTML}{EDEDED}
-
-
 \begin{document}
 \input{frontside}
 
