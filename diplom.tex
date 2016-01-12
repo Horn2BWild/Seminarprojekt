@@ -43,11 +43,11 @@
  }
     %\DeclareCaptionFont{blue}{\color{blue}} 
 
-  %\captionsetup[lstlisting]{singlelinecheck=false, labelfont={blue}, textfont={blue}}
+ % \captionsetup[lstlisting]{singlelinecheck=false, labelfont={blue}, textfont={blue}}
   \usepackage{caption}
-\DeclareCaptionFont{white}{\color{white}}
-\DeclareCaptionFormat{listing}{\colorbox[cmyk]{0.43, 0.35, 0.35,0.01}{\parbox{\textwidth}{\hspace{15pt}#1#2#3}}}
-\captionsetup[lstlisting]{format=listing,labelfont=white,textfont=white, singlelinecheck=false, margin=0pt, font={bf,footnotesize}}
+\DeclareCaptionFont{black}{\color{black}}
+\DeclareCaptionFormat{listing}{{\parbox{\dimexpr\textwidth-7cm\fboxsep-2\fboxrule\relax}{\hspace{15pt}#1#2#3}}}
+\captionsetup[lstlisting]{format={listing},labelfont={black},textfont={black}, singlelinecheck={false}, margin=0pt, font={bf,footnotesize}}
 
 \usepackage{nomencl}
 \usepackage[pdftex]{graphicx}

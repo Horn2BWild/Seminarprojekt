@@ -11,7 +11,7 @@ The \textit{Very high-speed integrated circuit Hardware Description Language} is
     \node [fill=codebgcolor]
     {{
         \begin{tabular}{l}
-\begin{lstlisting}
+\begin{lstlisting}[caption={Full Adder design in VHDL}]
 entity FullAdder is
 	port (a, b, ci: in std_logic;
 		s, co: out std_logic;
@@ -38,10 +38,10 @@ Verilog is another text-based HDL standardised in IEEE 1364.
 \lstset{language=Verilog, tabsize=4}
 \begin{center}
   \begin{tikzpicture}
-    \node [fill=codebgcolor,rounded corners=5pt]
+    \node [fill=codebgcolor]
     {{
         \begin{tabular}{l}
-\begin{lstlisting}
+\begin{lstlisting}[caption={Full Adder design in Verilog}]
 module FullAdder(a, b, ci, s, co);
 	input a, b, ci;
 	output s, co;
