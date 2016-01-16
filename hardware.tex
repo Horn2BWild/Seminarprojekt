@@ -1,7 +1,7 @@
 \chapter{Integrated Circuits}
 Typical electronic circuits are made of different electronic components, such as resistors, capacitors and transistors. Building them up in a discrete way needs much space and so those devices are miniaturized and built up on one semiconductor plate to an IC. In that way millions of transistors can be placed on a chip in the size of some cm$^2$. The miniaturization of electronic circuits gives some important advantages:
 \begin{itemize}
-\item low size: housands of transistors can be placed on one chip.
+\item low size: thousands of transistors can be placed on one chip.
 \item low power dissipation: Due to smaller component sizes the energy usage is lower and so less power is dissipated by heat.
 \item high processing speed due to short wiring length
 \item low costs due to mass production. Several ICs can be manufactured on one waver plate in one production process.
@@ -13,14 +13,17 @@ Digital systems both need dynamic and static power, where the whole power demand
 P=P_{static}+P_{dynamic}
 \end{equation}
 \subsection{static power consumption}
-Generally CMOS devices have a low static power consumption. This consumption occurs when no states are changed and is constant. Static power consumption occurs due to reverse-bias leakage between diffused regions and the substrate.\cite{Sar97} With improving manufacturing technologies the gate thicknesses decreases and so the probability for tunneling effects increases. For this reason leakage currents are increasing with increasing technologies.\cite{Iye10} The total leakage current between the supply voltage $V_{DD}$ and ground can be determined by
+Generally CMOS devices have a low static power consumption. This consumption occurs when no states are changed and is constant. Static power consumption occurs due to reverse-bias leakage between diffused regions and the substrate.\cite{Sar97} With improving manufacturing technologies the gate thicknesses decrease and so the probability for tunneling effects increases. For this reason leakage currents are increasing with increasing technologies.\cite{Iye10} The total leakage current between the supply voltage $V_{DD}$ and ground can be determined by
 \begin{equation}
 P_{static}=I_{DD}\cdot V_{DD}
 \end{equation}
 \subsection{dynamic power consumption}
-
-\subsubsection{transient power consumption}
-\subsubsection{capacitive-load power consumption}
+Every wire and logic gate has capacitive effects. When an IC is switching from one state to another state those capacities have to be charged. The energy to charge from 0 to the supply voltage $V_{DD}$ can be determined by $C\cdot V_{DD}^2$. When the capacities are discharged from $V_{DD}$ to 0 no power from the supply is used\cite{Har13}, therefore discharging has not to be modelled for power considerations. Assuming the IC to be clocked with frequency $f$, there are $\frac{f}{2}$ charging processes as well as $\frac{f}{2}$ discharging processes per second. In this way the maximum dynamic power can be calculated by
+\begin{equation}
+P_{dynamic}=\frac{f}{2}\cdot C\cdot V_{DD}^2
+\end{equation}
+\subsection{observations on power consumption}
+As the total power consumption of an IC can be seen as $P=V_{DD}*\big(I_{DD}+\frac{1}{2}\cdot f\cdot C\cdot V_{DD}\big)$, the consumption can be lowered when decreasing the supply voltage $V_{DD}$ and the frequency $f$. For correct operation of semiconductor devices like transistors and diodes, the treshold voltage have to be exceeded, so the supply voltage can not be decreased boundless. Therefore the exact need of calculation speed should be observed in advance, and in that way the clock rate of ICs set to the lowest possible frequency which is well adapted for reasonable operation. 
 \section{IC types}
 \subsection{ASIC - Application Specific Integrated Circuit}
 
@@ -84,6 +87,16 @@ In this section some important hardware elements are explained.
 \subsubsection{ARM Cortex A9}
 \subsection{flip-flops}
 Flipflops are basic logic elements with 2 stable states. They consist of a data input and a clock input, as well as a data output. Optionally a set/reset-pin or an inverted output can be available. Fliipflops are used as memory elements. Simplified, a logical state at the data input is stored at the rising edge of the clock signal, and held stable to the output until the next rising edge occures. The most used flipflop is the D-flipflop.
+\begin{figure}
+\begin{center}
+    \subfigure[RS-flipflop]{\includegraphics[width=2.5cm,keepaspectratio=true]{bilder/png/RSflipflop}\label{fig:rsflipflop}}
+    \subfigure[JK-flipflop]{\includegraphics[width=2.5cm,keepaspectratio=true]{bilder/png/JKflipflop}\label{fig:jkflipflop}}
+    \subfigure[T-flipflop]{\includegraphics[width=2.5cm,keepaspectratio=true]{bilder/png/Tflipflop}\label{fig:tflipflop}}
+    \subfigure[D-flipflop]{\includegraphics[width=2.5cm,keepaspectratio=true]{bilder/png/Dflipflop}\label{fig:dflipflop}}   
+\caption{logic blocks of different flipflop types}
+\end{center}
+\end{figure}
+
 \begin{itemize}
 \item RS-flipflop\\
 The RS-flipflop, which can be seen in figure \ref{fig:rsflipflop}, is the most simple form of a flipflop. It consists of a set and a reset input. The state change is asynchrously and therefore not depending on rising clock edges. 
@@ -110,13 +123,6 @@ S &  R & $Q_{t+1}$\\
 
 The different state transitions of a RS-flipflop are listed in table \ref{tab:rsstates}. As long as the R and S bits are set to low state the output is held constant at the previous state. When the reset bit is set the output is changed to 0, when the set bit is set to 1, Q changes to 1. When R as well as S are both set, the output is simultaneously forced to get low and high. In this metastable state the next state is undefined and is dependent on factoring characterizations.
 
-\begin{figure}[htbp]
-\begin{center}
-\includegraphics[width=2cm,keepaspectratio=true]{bilder/png/RSflipflop}
-\caption{RS-flipflop}
-\label{fig:rsflipflop}
-\end{center}
-\end{figure}
 \item RES-flipflop\\
 In addition to the simple RS-flipflop this type has an enable input. This causes state changes to only occur when the enable bit is set. The advantage of this configuration is that state changes due to inconsistencies on the input lines. Even though the RES-flipflop has an enable pin it is still an asynchronous device.
 \item JK-flipflop\\
@@ -141,13 +147,7 @@ J &  K & $Q_{t+1}$\\
 \label{tab:jkstates}
 \end{center}
 \end{table}
-\begin{figure}[htbp]
-\begin{center}
-\includegraphics[width=2cm,keepaspectratio=true]{bilder/png/JKflipflop}
-\caption{JK-flipflop}
-\label{fig:jkflipflop}
-\end{center}
-\end{figure}
+
 \item T-flipflop\\
 The T-flipflop as shown in figure \ref{fig:tflipflop} performs no state transition as long as the T-input is set low. When it is set to 1 the flipflop starts to toggle, the next state will be set to the inverse of the current state, corresponding to the clock rate. The state transitions are listed in table \ref{tab:tstates}.
 \begin{table}
@@ -165,23 +165,12 @@ T & $Q_{t+1}$\\
 \label{tab:tstates}
 \end{center}
 \end{table}
-\begin{figure}[htbp]
-\begin{center}
-\includegraphics[width=2cm,keepaspectratio=true]{bilder/png/Tflipflop}
-\caption{T-flipflop}
-\label{fig:tflipflop}
-\end{center}
-\end{figure}
+
 \item D-flipflop\\
 The D-flipflop is the most used flipflop.It can be seen in figure \ref{fig:dflipflop}. The D-flipflop reads the D input at the rising edge of the clock and is therefore a synchronous device. The output is set to the D input at the rising edge and held stable at any other time. In this way the D-flipflop can be seen as simple memory cell
-\begin{figure}[htbp]
-\begin{center}
-\includegraphics[width=2cm,keepaspectratio=true]{bilder/png/Dflipflop}
-\caption{D-flipflop}
-\label{fig:dflipflop}
-\end{center}
-\end{figure}
+
 \end{itemize}
+
 \subsubsection{timing properties}
 When using flip-flops some timing parameters are important (seen in figure \ref{fig:flipfloptiming}) and explained below.
 \begin{itemize}
