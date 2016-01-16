@@ -11,7 +11,10 @@ In digital systems the power consumption has an important role. Especially in mo
 \begin{equation}
 P=P_{static}+P_{dynamic}
 \end{equation}
-Generally CMOS devices have a low static power consumption. This consumption occurs when no states are changed and is constant. Static power consumption occurs due to reverse-bias leakage between diffused regions and the substrate.\cite{Sar97} 
+Generally CMOS devices have a low static power consumption. This consumption occurs when no states are changed and is constant. Static power consumption occurs due to reverse-bias leakage between diffused regions and the substrate.\cite{Sar97} With improving manufacturing technologies the gate thicknesses decreases and so the probability for tunneling effects increases. For this reason leakage currents are increasing with increasing technologies.\cite{Iye10} The total leakage current between the supply voltage $V_{DD}$ and ground can be determined by
+\begin{equation}
+P_{static}=I_{DD}\cdot V_{DD}
+\end{equation}
 \section{IC types}
 \subsection{ASIC - Application Specific Integrated Circuit}
 
