@@ -6,7 +6,13 @@ Typical electronic circuits are made of different electronic components, such as
 \item high processing speed due to short wiring length
 \item low costs due to mass production. Several ICs can be manufactured on one waver plate in one production process.
 \end{itemize}
-
+\section{power consumption of ICs}
+In digital systems the power consumption has an important role. Especially in mobile or space systems where the amount of available energy is limited, the power usage of the system should be analyzed. Digital systems both need dynamic and static power, where the whole power demand is calculated as
+\begin{equation}
+P=P_{static}+P_{dynamic}
+\end{equation}
+Generally CMOS devices have a low static power consumption. This consumption occurs when no states are changed and is constant. Static power consumption occurs due to reverse-bias leakage between diffused regions and the substrate.\cite{Sar97} 
+\section{IC types}
 \subsection{ASIC - Application Specific Integrated Circuit}
 
 \subsection{FPGA - Field-Programmable Gate Array}
