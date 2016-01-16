@@ -3,7 +3,7 @@
 When the integrated circuit was invented only a few transistors had to be placed on a single chip. The design and placement of the transistors was done manually. With increasing technology transistors became smaller and more could be place on one chip. The integration became more complex, and designing a chip manually was not suitable any more. The solution for this problem was the development of so called \textit{Hardware Description Languages}.\\
 The purpose of those languages was to create text-based descriptions of electric circuits and synthesizing them automatically with predefined databases to a hardware layout. In the 1980s Verilog and VHDL were released, which are the two most popular HDLs.
 \subsubsection{VHDL}
-The \textit{Very high-speed integrated circuit Hardware Description Language} is a HDL originally developed by the US Department of Defense to document the behaviour of an ASIC. It describes logical models and electrical circuits using text files and is standardised in IEEE 1076.\\
+The \textit{Very high-speed integrated circuit Hardware Description Language} is a HDL originally developed by the US Department of Defense to describe the behaviour of an ASIC. It describes logical models and electrical circuits using text files and was standardised in IEEE 1076 in 1987. Since then the standard has been updated several times, the current revision is dated to IEEE 1076-2008.\cite{Har13}\\
 There are three basic VHDL elements. The \textit{architecture} describes the interfaces of the model. It can be compared with a single chip of a whole system. The number and naming of the interfaces is done using the \textit{port}-statement and has to be unique. The \textit{entity} describes the algorithm of the system. Each entity has to be related to at least one architecture. To exchange information between blocks the \textit{signal}-statement is used, but it is not possible to exchange information between different architectures. For more information on VHDL-elements see \cite{JuergenReichardt2013}. An implementation of a full adder can be seen in listing \ref{lst:vhdlfulladd}.
 
 \lstset{language=VHDL, tabsize=4}
@@ -34,7 +34,7 @@ end behaviour;
 \end{center}
 
 \subsubsection{Verilog}
-Verilog is another text-based HDL standardised in IEEE 1364. In Verilog modules are declared. Each port is defined assigning the type of the port (input/output). Internal wires are declared as wires. A full adder model in Verilog is listed in listing \ref{lst:verfulladd}.
+Verilog is another text-based HDL standardised in IEEE 1364. Originally this HDL has been a proprietary language, but has been made to an open standard in 1990. Different extensions for better support modeling and system verification have been merged to a single standard called SystemVerilog.\cite{Har13}\\ In Verilog modules are declared. Each port is defined assigning the type of the port (input/output). Internal wires are declared as wires. A full adder model in Verilog is listed in listing \ref{lst:verfulladd}.
 
 \lstset{language=Verilog, tabsize=4}
 \begin{center}
