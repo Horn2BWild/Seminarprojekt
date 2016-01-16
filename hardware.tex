@@ -7,14 +7,20 @@ Typical electronic circuits are made of different electronic components, such as
 \item low costs due to mass production. Several ICs can be manufactured on one waver plate in one production process.
 \end{itemize}
 \section{power consumption of ICs}
-In digital systems the power consumption has an important role. Especially in mobile or space systems where the amount of available energy is limited, the power usage of the system should be analyzed. Digital systems both need dynamic and static power, where the whole power demand is calculated as
+In digital systems the power consumption has an important role. Especially in mobile or space systems where the amount of available energy is limited, the power usage of the system should be analyzed. As the power consumption is depending on frequency and supply voltage, decreasing any of them is advantageous. Due to less heat dissipation stress gradients associated to heat are decreased. Furthermore the limited power on mobile or space devices can be used more efficiently.\\
+Digital systems both need dynamic and static power, where the whole power demand is calculated as
 \begin{equation}
 P=P_{static}+P_{dynamic}
 \end{equation}
+\subsection{static power consumption}
 Generally CMOS devices have a low static power consumption. This consumption occurs when no states are changed and is constant. Static power consumption occurs due to reverse-bias leakage between diffused regions and the substrate.\cite{Sar97} With improving manufacturing technologies the gate thicknesses decreases and so the probability for tunneling effects increases. For this reason leakage currents are increasing with increasing technologies.\cite{Iye10} The total leakage current between the supply voltage $V_{DD}$ and ground can be determined by
 \begin{equation}
 P_{static}=I_{DD}\cdot V_{DD}
 \end{equation}
+\subsection{dynamic power consumption}
+
+\subsubsection{transient power consumption}
+\subsubsection{capacitive-load power consumption}
 \section{IC types}
 \subsection{ASIC - Application Specific Integrated Circuit}
 
