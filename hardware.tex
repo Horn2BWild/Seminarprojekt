@@ -25,8 +25,17 @@ P_{dynamic}=\frac{f}{2}\cdot C\cdot V_{DD}^2
 \subsection{observations on power consumption}
 As the total power consumption of an IC can be seen as $P=V_{DD}*\big(I_{DD}+\frac{1}{2}\cdot f\cdot C\cdot V_{DD}\big)$, the consumption can be lowered when decreasing the supply voltage $V_{DD}$ and the frequency $f$. For correct operation of semiconductor devices like transistors and diodes, the treshold voltage have to be exceeded, so the supply voltage can not be decreased boundless. Therefore the exact need of calculation speed should be observed in advance, and in that way the clock rate of ICs set to the lowest possible frequency which is well adapted for reasonable operation. 
 \section{IC types}
+Generally ICs can be subdivided in two groups. If they are used for different purposes like microprocessors, they are called \textit{general purpose IC}. Otherwise if they are used only for specific applications they are \textit{application specific ICs}. ASICs and FPGAs are typical types of application-specific chips.
+\subsection{microprocessor}
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[width=10cm,keepaspectratio=true]{bilder/png/microprocessorblockdiagram}
+\caption{Internal structure of a microprocessor}
+\label{fig:microprocessorblockdiagram}
+\end{center}
+\end{figure}
 \subsection{ASIC - Application Specific Integrated Circuit}
-
+ASICs are ICs which are designed for a specific purpose. 
 \subsection{FPGA - Field-Programmable Gate Array}
 In comparison to ASICs the FPGA can be programmed for different applications after delivery. The programming is done by combining a large number of logic blocks (CLB, LAB) and lookup tables (LUTs) through configurable bus connections. As FPGAs are reprogrammable, a design change in very late design phases is possible, even over remote connections. A general structure of a FPGA can be seen in figure \ref{fig:fpgablocksgeneral}. A FPGA is programmed using a HDL (see section \ref{kap:HDL}).
 \begin{figure}[htbp]
@@ -76,14 +85,7 @@ A detailed description of the operating of floating-gate transistors can be foun
 
 \section{Hardware elements}
 In this section some important hardware elements are explained.
-\subsection{microprocessor}
-\begin{figure}[htbp]
-\begin{center}
-\includegraphics[width=10cm,keepaspectratio=true]{bilder/png/microprocessorblockdiagram}
-\caption{Internal structure of a microprocessor}
-\label{fig:microprocessorblockdiagram}
-\end{center}
-\end{figure}
+
 \subsubsection{ARM Cortex A9}
 \subsection{flip-flops}
 Flipflops are basic logic elements with 2 stable states. They consist of a data input and a clock input, as well as a data output. Optionally a set/reset-pin or an inverted output can be available. Fliipflops are used as memory elements. Simplified, a logical state at the data input is stored at the rising edge of the clock signal, and held stable to the output until the next rising edge occures. The most used flipflop is the D-flipflop.
