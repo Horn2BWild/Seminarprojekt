@@ -212,7 +212,9 @@ One of the most important things of oscillators is frequency stability. High sta
 \label{fig:crystaloscillatorsymbol}
 \end{center}
 \end{figure}
-\paragraph{phase-locked loop}
+\paragraph{phase-locked loop\\}
+A PLL is a system, which allows a signal to stay constant to an external reference clock. A block diagram of a PLL is shown in figure \ref{fig:pllblocks}. As reference clock most times a crystal oscillator is used. The reference clock signal is divided and the phase of this reference signal is compared with the output of the PLL. What the PLL now does is to keep the phase between the two signals constant (as it can be seen in figure \ref{fig:pllphase}). For this the error signal, given by the phase comparator, is lead to a VCO . This signal is divided by another divider and fed back to the phase comparator.\\
+In comparison to other oscillators with variable frequency the long term stability is very high. The dividers can be changed very quickly and so frequency changes can be realized easily. Furthermore the divider values can be configured digitally and so remote modification is possible. As disadvantages higher phase noise and the complexity of the systems have to be mentioned.
 \begin{figure}[htbp]
 \begin{center}
 \includegraphics[width=12cm,keepaspectratio=true]{bilder/png/PLLblocks}
