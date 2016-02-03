@@ -30,12 +30,23 @@ Generally ICs can be subdivided in two groups. If they are used for different pu
 Microprocessors are built up as general purpose processors to compute a whole set of commands called machine language. The machine code then is a long sequence of operations. For executing a program the operation code (opcode) is fetched into the instruction register. The address for the next opcode is stored in the program counter. A microprocessor contains mainly following blocks as shown in figure \ref{fig:microprocessorblockdiagram}:
 \begin{itemize}
 \item Arithmetical Logical Unit (ALU)\\
-This block is the central unit of the processor. Using control inputs a lot of arithmetical and logical operations can be done. As the ALU does not contain any memory cells, operation registers have to store the data as long as the operation is finished. Most ALUs are not able to compute all operations (e.g. multiplications), so those operations have to be done using other operation codes (a multiplication can be done using shift and add-operatins). 
+This block is the central unit of the processor. Using control inputs a lot of arithmetical and logical operations can be done. As the ALU does not contain any memory cells, operation registers have to store the data as long as the operation is finished. Most ALUs are not able to compute all operations (e.g. multiplications), so those operations have to be done using other operation codes (a multiplication can be done using shift and add-operations). 
 \item Instruction Register (IR)
 \item Program Counter (PC)
 \item Registers\\
-As special register the \textit{accumulator} has to be mentioned.
-\item Control Unit
+Registers are a set of flipflops grouped together with a single command. Each flipflop is able to store one bit. For more information on flipflops see chapter \ref{ch:flipflops}. All microprocessors have a whole set of registers, some of them can be seen external. Those can be used to read data from the bus or write data to the data bus. Accessing registers is much faster than using memory chips. This is due to the higher clock rate of processors than the bus system. Furthermore the address decoder as well as the bus interface have not to be activated for the access.\\
+While some registers can be used for different purposes some special registers are built up for some special usage. Such special registers are memory control registers or the accumulator. 
+\item Control Unit\\
+This block is used for decoding the opcodes and coordinating all other blocks. As some operations need access to the bus system the control unit has to do complex sequences of signals in a exact defined time lapse. Furthermore interrupts and other command signals have to be computed. A simple and approved method to do this is using special ROM components.\cite{Wue06}\\
+A simplified procedure of the control unit can be given as
+\begin{enumerate}
+\item load PC to the address bus
+\item set the external control signals to read-access on the memory
+\item read the opcode from the data bus and store it to the IR
+\item decode the opcode
+\item increment the PC
+\end{enumerate}
+Item 1 to 3 are called \textit{instruction read cycle}.
 \item Memory Controller
 \item Bus system
 \end{itemize}
@@ -100,6 +111,7 @@ In this section some important hardware elements are explained.
 
 \subsubsection{ARM Cortex A9}
 \subsection{flip-flops}
+\label{ch:flipflops}
 Flipflops are basic logic elements with 2 stable states. They consist of a data input and a clock input, as well as a data output. Optionally a set/reset-pin or an inverted output can be available. Fliipflops are used as memory elements. Simplified, a logical state at the data input is stored at the rising edge of the clock signal, and held stable to the output until the next rising edge occures. The most used flipflop is the D-flipflop.
 \begin{figure}
 \begin{center}
