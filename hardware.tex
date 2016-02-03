@@ -27,6 +27,18 @@ As the total power consumption of an IC can be seen as $P=V_{DD}*\big(I_{DD}+\fr
 \section{IC types}
 Generally ICs can be subdivided in two groups. If they are used for different purposes like microprocessors, they are called \textit{general purpose IC}. Otherwise if they are used only for specific applications they are \textit{application specific ICs}. ASICs and FPGAs are typical types of application-specific chips.
 \subsection{microprocessor}
+Microprocessors are built up as general purpose processors to compute a whole set of commands called machine language. The machine code then is a long sequence of operations. For executing a program the operation code (opcode) is fetched into the instruction register. The address for the next opcode is stored in the program counter. A microprocessor contains mainly following blocks as shown in figure \ref{fig:microprocessorblockdiagram}:
+\begin{itemize}
+\item Arithmetical Logical Unit (ALU)\\
+This block is the central unit of the processor. Using control inputs a lot of arithmetical and logical operations can be done. As the ALU does not contain any memory cells, operation registers have to store the data as long as the operation is finished. Most ALUs are not able to compute all operations (e.g. multiplications), so those operations have to be done using other operation codes (a multiplication can be done using shift and add-operatins). 
+\item Instruction Register (IR)
+\item Program Counter (PC)
+\item Registers\\
+As special register the \textit{accumulator} has to be mentioned.
+\item Control Unit
+\item Memory Controller
+\item Bus system
+\end{itemize}
 \begin{figure}[htbp]
 \begin{center}
 \includegraphics[width=10cm,keepaspectratio=true]{bilder/png/microprocessorblockdiagram}
