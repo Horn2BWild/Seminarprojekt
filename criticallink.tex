@@ -1,6 +1,8 @@
 \chapter{Criticallink MitySOM SoC}
 
 \section{Interfaces}
+\subsection{UART}
+\subsection{GPIO}
 \subsection{I$^2$C}
 The I$^2$C-bus was intentionally developed by Philips in the early 1980s to exchange information between ICs located on the same board. This bus is designed for synchronous transmission and is built up of ground, data and clock line. As advantage of this protocol the clock reconstruction possibilities at the receiver has to be mentioned. Furthermore an arbitrary protocol guarantees that only one master exists at one time.\cite{Wue06} I$^2$C defines communication modes as follows:
 \begin{table}
@@ -26,7 +28,6 @@ ultra fast mode (UFm) & 5 Mbit/s & unidirectional\\
 \end{table}
 As the I$^2$C-bus is inteded to exchange data between ICs the packet size is small. This leads to the fact that high accuracy of the clock is not needed for most applications.\cite{I2Cspeed} Intentionally the I$^2$C-bus was designed for 5V reference voltage. With the release of the specification I$^2$C-2.0 the bus got also the possibility to operate with 2V references.\cite{I2Cvoltage}
 More information can be found in the I$^2$C-specification in \cite{I2Cspec}.
-\subsection{GPIO}
 \subsection{CAN}
 The CAN-bus was developed by Bosch in the early 1980s as serial communication protocol for motorized vehicles. In 1994 it became an international standard ISO 11898. The protocol is able to handle bitrates up to 1 Mbit/s and has multi-master capability. That means that different bus members can have master state at different times. CAN is able to handle reference voltages of 5V and 3.3V.\cite{Corrig2008} The CAN-bus uses two signaling lines for communications. As CAN is designed as real time control protocol with a high level of security, it has some important features beside others\cite{boschcan91}:
 \begin{itemize}
