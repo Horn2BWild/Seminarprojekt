@@ -28,4 +28,11 @@ As the I$^2$C-bus is inteded to exchange data between ICs the packet size is sma
 More information can be found in the I$^2$C-specification in \cite{I2Cspec}.
 \subsection{GPIO}
 \subsection{CAN}
+The CAN-bus was developed by Bosch in the early 1980s as serial communication protocol for motorized vehicles. In 1994 it became an international standard ISO 11898. The protocol is able to handle bitrates up to 1 Mbit/s and has multi-master capability. That means that different bus members can have master state at different times. CAN is able to handle reference voltages of 5V and 3.3V.\cite{Corrig2008} The CAN-bus uses two signaling lines for communications. As CAN is designed as real time control protocol with a high level of security, it has some important features beside others\cite{boschcan91}:
+\begin{itemize}
+\item message priorization
+\item guaranteed latency times
+\item different error detection capabilities
+\item autonomous switching off of defect nodes
+\end{itemize}
 The specification of CAN can be found in \cite{boschcan91}, an even more detailed description in \cite{nxpcan98}.
