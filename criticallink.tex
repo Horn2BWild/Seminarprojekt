@@ -1,5 +1,6 @@
 \chapter{Criticallink MitySOM SoC}
-Altera was founded in 1983 and developed their first FPGA in 1992.\cite{althist16} The Altera Cyclone V was developed to decrease time-to-market and cost requirements, simultaneously the power consumption is decreased. Cyclone V devices are made in 28nm technology and have a core volage of 1.1V. The 10kB memory blocks have a built in soft ECC. \cite{altcycvov15}
+Altera was founded in 1983 and developed their first FPGA in 1992.\cite{althist16} The Altera Cyclone V was developed to decrease time-to-market and cost requirements, simultaneously the power consumption is decreased. Cyclone V devices are made in 28nm technology and have a core volage of 1.1V. The 10kB memory blocks have a built in soft ECC.\cite{altcycvov15}\\
+The Cyclone V SoC is built up of a FPGA and a dual-core ARM Cortex HPS. Both portions are connected using a FPGA-HPS-bridge. A high-level structural block diagram of the SoC device is shown in figure \ref{fig:alterasocblocks}. The HPS is connectable to a wide set of peripherals and supports symmetric and asymmetric multiprocessing.
 \begin{figure}[htbp]
 \begin{center}
 \includegraphics[width=10cm,keepaspectratio=true]{bilder/png/AlteraSoC}
