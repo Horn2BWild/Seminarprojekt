@@ -29,6 +29,12 @@ The Cyclone V SoC is built up of a FPGA and a dual-core ARM Cortex HPS. Both por
 \subsection{UART}
 UART is a transmission protocol which was developed in the 1960s. UART is highly flexible in the sense that voltages, timing, error checking and flow control can be configured as the application needs. The commonly supported baud rates of UART are 600-921600 baud/s. As the history of UART is quite long some different physical layer standards have been developed, such as RS232C or RS485. Due to this long development history also quite some radiation hardened devices exist, like the Aeroflex DRS4485.\cite{aeroflex14}
 \subsection{GPIO}
+A GPIO is a digital interface which is made of pins with no dedicated usage. It is possible to configure them flexible during runtime to act as input or output.
+\begin{itemize}
+\item When the pin is configured as input it can read data from a digital circuit
+\item A binary signal can be sent to a digital circuit when the pin is configured as output.
+\end{itemize}
+GPIO-pins are available on most SoC and FPGA-devices, in some cases it is possible to configure every pin with no dedicated usage as GPIO-pin.\cite{kernelgpio15}
 \subsection{I$^2$C}
 The I$^2$C-bus was intentionally developed by Philips in the early 1980s to exchange information between ICs located on the same board. This bus is designed for synchronous transmission and is built up of ground, data and clock line. As advantage of this protocol the clock reconstruction possibilities at the receiver has to be mentioned. Furthermore an arbitrary protocol guarantees that only one master exists at one time.\cite{Wue06} I$^2$C defines communication modes as follows:
 \begin{table}
