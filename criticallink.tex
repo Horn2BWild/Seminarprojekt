@@ -69,3 +69,17 @@ The CAN-bus was developed by Bosch in the early 1980s as serial communication pr
 \item autonomous switching off of defect nodes
 \end{itemize}
 The specification of CAN can be found in \cite{boschcan91}, an even more detailed description in \cite{nxpcan98}.
+\section{booting}
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[width=13cm,keepaspectratio=true]{bilder/png/bootstages}
+\caption{Boot steps of an Altera Cyclone V SoC\cite[chapter A]{AlteraHPS15}}
+\label{fig:bootstages}
+\end{center}
+\end{figure}
+\begin{itemize}
+\item cold reset\\
+In this case all registers are initialized and the HPS starts executing the BootROM code located at the reset exception address. A cold reset is done whenever the device is booted after a full shutdown.
+\item warm reset\\
+In case of a warm reset some register contents are preserved. In addition the device has the ability to execute a preloader located in the on-chip RAM.
+\end{itemize}
