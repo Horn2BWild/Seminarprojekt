@@ -70,6 +70,12 @@ The CAN-bus was developed by Bosch in the early 1980s as serial communication pr
 \end{itemize}
 The specification of CAN can be found in \cite{boschcan91}, an even more detailed description in \cite{nxpcan98}.
 \section{booting}
+For booting three different configuration options are possible:
+\begin{itemize}
+\item The HPS preloader and the FPGA configuration are independent. In this case the FPGA configuration image is loaded from an external source, the HPS preloader is also located externally.
+\item The HPS boots and the FPGA is configured after this by the HPS. The HPS preloader is loaded from an external memory. After the boot of the HPS the FPGA is reset and a configuration image from a flash memory or a communication interface is loaded by the HPS to the FPGA.
+\item The FPGA is configured and the HPS boots from the FPGA portion. For this the FPGA configuration image is loaded from an external source. The FPGA is configured and contains a preloader image for the HPS. When using this initialization option the HPS should not be released from reset state until the FPGA configuration is completed. After the HPS release the HPS preloader image is executed by the BootROM over the FPGA-HPS-bridge.
+\end{itemize}
 \begin{figure}[htbp]
 \begin{center}
 \includegraphics[width=13cm,keepaspectratio=true]{bilder/png/bootstages}
