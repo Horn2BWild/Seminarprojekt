@@ -70,12 +70,13 @@ The CAN-bus was developed by Bosch in the early 1980s as serial communication pr
 \end{itemize}
 The specification of CAN can be found in \cite{boschcan91}, an even more detailed description in \cite{nxpcan98}.
 \section{booting}
-For booting three different configuration options are possible:
+For booting three different configuration options are possible:\cite[chapter A]{AlteraHPS15}
 \begin{itemize}
 \item The HPS preloader and the FPGA configuration are independent. In this case the FPGA configuration image is loaded from an external source, the HPS preloader is also located externally.
 \item The HPS boots and the FPGA is configured after this by the HPS. The HPS preloader is loaded from an external memory. After the boot of the HPS the FPGA is reset and a configuration image from a flash memory or a communication interface is loaded by the HPS to the FPGA.
 \item The FPGA is configured and the HPS boots from the FPGA portion. For this the FPGA configuration image is loaded from an external source. The FPGA is configured and contains a preloader image for the HPS. When using this initialization option the HPS should not be released from reset state until the FPGA configuration is completed. After the HPS release the HPS preloader image is executed by the BootROM over the FPGA-HPS-bridge.
 \end{itemize}
+The boot flow is shown in figure \ref{fig:bootstages}.
 \begin{figure}[htbp]
 \begin{center}
 \includegraphics[width=13cm,keepaspectratio=true]{bilder/png/bootstages}
@@ -83,9 +84,25 @@ For booting three different configuration options are possible:
 \label{fig:bootstages}
 \end{center}
 \end{figure}
+\subsection{Reset}
 \begin{itemize}
 \item cold reset\\
 In this case all registers are initialized and the HPS starts executing the BootROM code located at the reset exception address. A cold reset is done whenever the device is booted after a full shutdown.
 \item warm reset\\
 In case of a warm reset some register contents are preserved. In addition the device has the ability to execute a preloader located in the on-chip RAM.
 \end{itemize}
+\subsection{Boot-ROM}
+The boot-ROM is located in the on-chip ROM and performs all actions needed for a basic initialization of the system. It determines the boot source, selected with the \texttt{BSEL}-pins and configures the main PLL clock rate using the \texttt{CSEL}-pins. Furthermore the flash controller is set to default settings. After initialization the boot-ROM jumps to the preloader. Depending on the location of the preloader, the first 4kB of the on-chip RAM are used. When the preloader image is located on a flash device, this memory is reserved as working space for the HPS, otherwise it can be used for user purposes. It has to be noted, that the Boot-ROM is always executed on CPU core 0. After the Boot-ROM has switched the control to the user software (the preloader) the access to the Boot-ROM is disabled.
+\subsubsection{booting from SD/MMC flash devices}
+If the preloader image is stored on a flash device as shown in figure \ref{fig:sdboot}, the first 512 byte of the storage are used as MBR where the start addresses and sizes of the boot images on the device are stored. The images themselfes are stored in a raw partition with no file system (shown as partition A2). As the on-chip RAM-size is limited to 64kB and 4kB are used as working memory (stack, ...) the preloader image has to have a maximum size of 60kB. In case of a failure of the flash device, the Boot-ROM checks the FPGA portion for a bootable fallback image. 
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[width=8cm,keepaspectratio=true]{bilder/png/sdboot}
+\caption{SD/MMC boot image layouts\cite[chapter A]{AlteraHPS15}}
+\label{fig:sdboot}
+\end{center}
+\end{figure}
+\subsection{Preloader}
+
+\subsection{UBoot-Loader}
+\subsection{Operating System}
