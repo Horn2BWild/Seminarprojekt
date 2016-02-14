@@ -105,4 +105,5 @@ If the preloader image is stored on a flash device as shown in figure \ref{fig:s
 \subsection{Preloader}
 The preloader is the first stage of the user software. Therefore the functionality of the preloader image is given by the user. Typical functions include the initialization of interfaces for booting the next software stage and the SDRAM interface. Furthermore the I/O-pins can be configured. The next software stage can be loaded from any interface available to the HPS and, after initialization of the SDRAM, is not limited to 60kB as it is for the on-chip ROM.
 \subsection{UBoot-Loader}
+UBoot is an universal bootloader for a variety of devices, especially made for embedded systems. It was invented by DENX in 1999 and available under the GPL. UBoot can be configured using a command line interface, the configuration can be safed to flash devices. Typically the UBoot-loader sets up the device tree, loads the operating system kernel and hands over the user software control to the kernel.
 \subsection{Operating System}
