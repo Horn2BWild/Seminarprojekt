@@ -18,18 +18,24 @@ The Cyclone V SoC is built up of a FPGA and a dual-core ARM Cortex HPS. Both por
 \end{center}
 \end{figure}
 \subsection{MPU subsystem}
-The HPS consists mainly of a 32-bit dual-core ARM Cortex A9 microprocessor, with 32kB instruction cache and 32kB data cache for each processor core. The two caches are independent and therefore simultaneous loading of instructions and data. Each cache supports parity checking. The latency of loading data depends on the availability of the data. In case of data and instruction are available in the L1 cache the hit takes 1 clock cycle, if it is available in the L2 cache the best case is 6 cycles. If the data is not available in a cache the latency vary depending on other operations. For this a so called preload engine (PLE) is implemented. This is a hardware block which allows the L2 cache to preload different memory regions defined by software control.\\
+The HPS consists mainly of a 32-bit dual-core ARM Cortex A9 microprocessor, with 32kB instruction cache and 32kB data cache for each processor core. The two caches are independent and therefore simultaneous loading of instructions and data. Each cache supports parity checking. The latency of loading data depends on the availability of the data. In case of data and instruction are available in the L1 cache the hit takes 1 clock cycle, if it is available in the L2 cache the best case is 6 cycles. If the data is not available in a cache the latency vary depending on other operations. For this a so called preload engine (PLE) is implemented. This hardware block allows the L2 cache to preload different memory regions defined by software control. Furthermore the endianess of the system can be configured.\\
 In a shared system with multi-processing possibilities and a single data source a hardware block to ensure coherency between processor cores and to ensure data consistency is needed. For this reason a snoop control unit (SCU) is implemented. This unit manages the data traffic for all Cortex A9 processor cores and the memory system including the L2 cache. In case of a SMP configuration also the data caches are maintained. Coherency of the instruction caches is not maintained in the SMP nor in the AMP configuration. Implementation details of the SCU can be found in \cite[chapter 9]{AlteraHPS15}.\\
-For an efficient calculation of floating point operations a FPU with full support of IEEE-754 half, full and double precision data is available, as well as convertion functionality between integer and floating point data types. For fast calculation of signal processing applications such as video and audio processing an additional block called MPE is implemented. The MPE supports SIMD processing. The principle of SIMD is shown in figure \ref{fig:alterahpssimd}.
+For an efficient calculation of floating point operations a FPU with full support of IEEE-754 half, full and double precision data is available, as well as convertion functionality between integer and floating point data types. For fast calculation of signal processing applications such as video and audio processing an additional block called multimedia processing engine (MPE) is implemented. The MPE supports SIMD processing. The principle of SIMD is shown in figure \ref{fig:alterahpssimd}.
 \begin{figure}[htbp]
 \begin{center}
 \includegraphics[width=12cm,keepaspectratio=true]{bilder/png/SIMD}
-\caption{Principle of SIMD processing in an ARM Cortex A9 processor core\cite[chapter 9]{AlteraHPS15}}
+\caption{Principle of SIMD processing\cite[chapter 9]{AlteraHPS15}}
 \label{fig:alterahpssimd}
 \end{center}
 \end{figure}
 \subsection{SDRAM controller subsystem}
-
+The HPS SDRAM controller subsystem is used to access an external SDRAM memory with size of up to 4 GB for following elements and interfaces:
+\begin{itemize}
+\item the MPU subsystem: dedicated 64-bit AXI interface.
+\item the FPGA portion: The interface consists of 64-bit read data ports, 64-bit write data ports and command ports to build up three AXI interfaces or six Avalon-MM interfaces in total.
+\item the L3 interconnect: dedicated 32-bit AXI interface.
+\end{itemize}
+Therefore this subsystem provides an interface between the HPS and the FPGA portion. The SDRAM controller can be subdivided in a MPFE and a single-port controller. While the single-port controller communicates with each external memory device, the MPFE provides several interfaces to the single-port controller through different FIFOs. As external memories DDR2, DDR3 and LPDDR2 devices can be used. Implementation details of the SDRAM controller subsystem can be found in \cite[chapter 11]{AlteraHPS15}
 \begin{figure}[htbp]
 \begin{center}
 \includegraphics[width=15cm,keepaspectratio=true]{bilder/png/AlteraHPS}
