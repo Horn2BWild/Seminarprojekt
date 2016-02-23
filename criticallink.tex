@@ -48,7 +48,18 @@ Therefore this subsystem provides an interface between the HPS and the FPGA port
 %SD/MMC-Controller
 \subsection{SD/MMC-Controller}
 As the internal memory of the Altera SoC has a very limited On-Chip memory, the storage of preloaders and operating systems for the HPS on external memory devices is very useful. For this reason a SD/MMC controller for using SD and MMC flash cards as well as CE-ATA hard drives is implemented. The HPS has access to this controller with a 32-bit bus via the L3 interconnect. The SD/MMC-controller supports voltage levels of 3V and, if it is supported by the card after power up, 1.8V. Implementation details can be found in \cite[chapter 14]{AlteraHPS15}.
-\section{FPGA-HPS-Bridge}
+%System interconnect
+\subsection{L3 Interconnect}
+%Clock manager
+\subsection{Clock Manager}
+%System manager
+\subsection{System Manager}
+%FPGA manager
+\subsection{FPGA Manager}
+%FPGA-HPS-Bridge
+\subsection{FPGA-HPS-Bridge}
+
+
 \section{Interfaces}
 \subsection{UART}
 UART is a transmission protocol which was developed in the 1960s. UART is highly flexible in the sense that voltages, timing, error checking and flow control can be configured as the application needs. The commonly supported baud rates of UART are 600-921600 baud/s. As the history of UART is quite long some different physical layer standards have been developed, such as RS232C or RS485. Due to this long development history also quite some radiation hardened devices exist, like the Aeroflex DRS4485.\cite{aeroflex14}
