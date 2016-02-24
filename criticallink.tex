@@ -49,7 +49,14 @@ Therefore this subsystem provides an interface between the HPS and the FPGA port
 \subsection{SD/MMC-Controller}
 As the internal memory of the Altera SoC has a very limited On-Chip memory, the storage of preloaders and operating systems for the HPS on external memory devices is very useful. For this reason a SD/MMC controller for using SD and MMC flash cards as well as CE-ATA hard drives is implemented. The HPS has access to this controller with a 32-bit bus via the L3 interconnect. The SD/MMC-controller supports voltage levels of 3V and, if it is supported by the card after power up, 1.8V. It has to be noted that that kind of voltage switching is not supported by the controller itself but can be done using GPIO. Implementation details can be found in \cite[chapter 14]{AlteraHPS15}.
 %System interconnect
-\subsection{L3 Interconnect}
+\subsection{System interconnect}
+The data exchange between different hardware blocks of the HPS is done via the interconnect system, consisting of the L3 main interconnect and the L4 bus system. Furthermore the L3 system has 3 major parts:
+\begin{itemize}
+\item L3 interconnect, with a data width of 64 bit. It is used to connect master blocks to slaves like SDRAM controller subsystem, on-chip memories or the FPGA manager.
+\item L3 master peripheral switch. This part has a data witdh of 32 bit and is used for memory-mastering peripherals.
+\item L3 slave peripheral switch. Masters of the master peripheral switch and the interconnect use this block for interconnect. The data width is 32 bit. Furthermore the L3 slave peripheral switch has 5 different L4 buses.
+\end{itemize}
+While the master peripheral as well as the slave peripheral switch are fully connected crossbars, the L3 interconnect is partially connected. Therefore a data exchange is only possible for predefined block combinations. Those can be found in \cite[chapter 7]{AlteraHPS15}.
 %Clock manager
 \subsection{Clock Manager}
 %System manager
