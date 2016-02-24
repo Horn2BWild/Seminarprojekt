@@ -9,6 +9,8 @@ The Cyclone V SoC is built up of a FPGA and a dual-core ARM Cortex HPS. Both por
 \end{center}
 \end{figure}
 \section{FPGA}
+
+
 \section{HPS}
 \begin{figure}[htbp]
 \begin{center}
@@ -59,12 +61,33 @@ The data exchange between different hardware blocks of the HPS is done via the i
 While the master peripheral as well as the slave peripheral switch are fully connected crossbars, the L3 interconnect is partially connected. Therefore a data exchange is only possible for predefined block combinations. Those can be found in \cite[chapter 7]{AlteraHPS15}.
 %Clock manager
 \subsection{Clock Manager}
+In the HPS different clocks organized in clock groups are used. Every clock is derived of the two main clocks \texttt{HPS\_CLK1} and \texttt{HPS\_CLK2} of the system. The clock generation of the HPS is done by the clock manager hardware block, shown in figure \ref{fig:hpsclockmanager}. 
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[width=15cm,keepaspectratio=true]{bilder/png/hpsclockmanager}
+\caption{Clock generation of an Altera Cyclone V HPS\cite{altcycvov15}}
+\label{fig:hpsclockmanager}
+\end{center}
+\end{figure}
+A derivation of the different clocks is done using a PLL, where the frequency is set with a VCO. Dividers are used to lower the generated frequency. For generating clocks three PLLs are available. The clock manager contains 4 different clock groups:
+\begin{itemize}
+\item OSC1 clock group\\
+This clock group has only one clock which is not divided and directly taken from the \texttt{HPS\_CLK1} as input for a PLL. It is used for OSC1-driven peripherals.
+\item main clock group\\
+The PLL input of this group is derived of the \texttt{HPS\_CLK1}. It contains 5 dividers to generate different clocks for the MPU, SD/MMC-controller or, among others, the system interconnect.
+\item peripheral clock group\\
+This group is used for clocking interfaces like USB, CAN and GPIO. The PLL can be sourced either from \texttt{HPS\_CLK1}, \texttt{HPS\_CLK2} or the \texttt{f2h\_periph\_ref\_clk} provided by the FPGA. The peripheral clock group has 5 dividers to provide 5 different clocks.
+\item SDRAM clock group\\
+The SDRAM clock group can use the  \texttt{HPS\_CLK1}, \texttt{HPS\_CLK2} or the \texttt{f2h\_sdram\_ref\_clk} clock provided by the FPGA for the SDRAM PLL.
+\end{itemize}
+\subsubsection{Considerations on the used PLL}
+The VCOs of the used PLLs have frequency stability up to +/- 20 percent of the used frequency and does not lose the PLL locking within this range. So when there is a need for changing the frequency more than 20 percent a slow ramp up or down of the VCO is a possibility to change frequency without loosing the lock. An other possibility, when e.g. lowering the frequency to the half is to decrease the frequency by 20 percent for three times and divide it by 2.4 percent in a last step.
 %System manager
 \subsection{System Manager}
 %FPGA manager
 \subsection{FPGA Manager}
 %FPGA-HPS-Bridge
-\subsection{FPGA-HPS-Bridge}
+\subsection{HPS-FPGA-bridges}
 
 
 \section{Interfaces}
