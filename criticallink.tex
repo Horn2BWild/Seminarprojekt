@@ -97,8 +97,16 @@ This module of the HPS is used to manage and configure the FPGA of the SoC. For 
 For more information about the implementation of the FPGA manager see \cite[chapter 5]{AlteraHPS15}.
 %FPGA-HPS-Bridge
 \subsection{HPS-FPGA-bridges}
-
-
+Data exchange between FPGA and HPS is done using bridges. For this reason 3 bridges are implemented in the Altera SoC:
+\begin{itemize}
+\item FPGA-to-HPS-bridge\\
+Masters in the FPGA communicate with slaves in the HPS using this bridge. Peripherals and memory in the HPS can also be accessed when using the FPGA-to-HPS-bridge. While the bridge master interface (connected to the L3 intercconnect)  is fixed to 64 bit width, the bridge slave interface (connected to the FPGA) can be configured to 32 bit, 64 bit or 128 bit width. When the ECC option in the L2 cache is enabled, the width has to be 64 bit. 
+\item HPS-to-FPGA-bridge\\
+THe HPS-to-FPGA bridge provides most masters of the HPS access to logic, peripherals and memory of the FPGA. The master interface is connected to the FPGA portion and has a configurable width of 32, 64 or 128 bit, on the other hand the width of the slave interface of the bridge is fixed to 64 bit. As the HPS-to-FPGA-bridge provides cross clocking it can work independently and asynchrous to the HPS clock in any clock domain. 
+\item Lightweight HPS-to-FPGA-bridge\\
+This bridge is a HPS-to-FPGA-bridge with lower performance and a fixed master interface width as well as slave interface width of 32 bit. The lightweight HPS-to-FPGA-bridge can be used for low-bandwidth traffic and is useful to take some traffic, like accessing CSRs of soft peripherals, from the HPS-to-FPGA-bridge to this bridge. The overall system performance can be increased significantly using all bridges at optimal capacity usage.
+\end{itemize}
+For implementation details and a technical specification of the bridges see \cite[chapter 8]{AlteraHPS15}.
 \section{Interfaces}
 \subsection{UART}
 UART is a transmission protocol which was developed in the 1960s. UART is highly flexible in the sense that voltages, timing, error checking and flow control can be configured as the application needs. The commonly supported baud rates of UART are 600-921600 baud/s. As the history of UART is quite long some different physical layer standards have been developed, such as RS232C or RS485. Due to this long development history also quite some radiation hardened devices exist, like the Aeroflex DRS4485.\cite{aeroflex14}
