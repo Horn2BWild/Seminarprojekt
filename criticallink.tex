@@ -85,6 +85,7 @@ A detailed description of the different clocks generated in the clock groups can
 The VCOs of the used PLLs have frequency stability up to +/- 20 percent of the used frequency and does not lose the PLL locking within this range. So when there is a need for changing the frequency more than 20 percent a slow ramp up or down of the VCO is a possibility to change frequency without loosing the lock. An other possibility, when e.g. lowering the frequency to the half is to decrease the frequency by 20 percent for three times and divide it by 2.4 percent in a last step.
 %System manager
 \subsection{System Manager}
+The system manager connects modules for system level functions like DMA or the SD/MMC-controller. Furthermore it contains CSRs to monitor and control functions by software access. The system manager also contains information about boot configurations and defines which bootROM-code to execute. Detailed descriptions of how the system manager works and how the different controllers of the system manager are defined can be found in \cite[chapter 5]{AlteraHPS15}.
 %FPGA manager
 \subsection{FPGA Manager}
 %FPGA-HPS-Bridge
