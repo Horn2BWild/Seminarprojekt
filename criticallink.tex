@@ -81,12 +81,13 @@ The VCOs of the used PLLs have frequency stability up to +/- 20 percent of the u
 The system manager connects modules for system level functions like the DMA controller or the SD/MMC-controller. Furthermore it contains CSRs to monitor and control functions by software access. The system manager also contains information about boot configurations and defines which bootROM-code to execute. Detailed descriptions of how the system manager works and how the different controllers of the system manager are defined can be found in \cite[chapter 5]{AlteraHPS15}.
 %FPGA manager
 \subsection{FPGA Manager}
-This module of the HPS is used to manage and configure the FPGA of the SoC. For this 32 general-purpose input as well as 32 general-purpose output signals to the FPGA are available. Handshaking is also done using this block when booting the HPS from the FPGA portion. When the FPGA is in user mode it offers following registers for low latency communication between FPGA and HPS:
-\begin{itemize}
-\item \texttt{gpi}: general-purpose input register. The 32 input signals from the FPGA are read from this register.
-\item \texttt{gpo}: general-purpose output register. Output signals to the FPGA are written to this register.
-\item \texttt{misci}: boot handshaking input register. Those 2 signals are used by the bootROM code to determine if the preloader image stored in the FPGA should be used for the boot process.
-\end{itemize}
+This module of the HPS is used to manage and configure the FPGA of the SoC. For this 32 general-purpose input as well as 32 general-purpose output signals to the FPGA are available. Handshaking is also done using this block when booting the HPS from the FPGA portion. When the FPGA is in user mode it offers registers for low latency communication between FPGA and HPS. The most important function of the FPGA manager is the configuration of the FPGA. When the FPGA is configured by the HPS the only possibility to do this is using the FPGA manager.
+%When the FPGA is in user mode it offers following registers for low latency communication between FPGA and HPS:
+%\begin{itemize}
+%\item \texttt{gpi}: general-purpose input register. The 32 input signals from the FPGA are read from this register.
+%\item \texttt{gpo}: general-purpose output register. Output signals to the FPGA are written to this register.
+%\item \texttt{misci}: boot handshaking input register. Those 2 signals are used by the bootROM code to determine if the preloader image stored in the FPGA should be used for the boot process.
+%\end{itemize}
 For more information about the implementation of the FPGA manager see \cite[chapter 5]{AlteraHPS15}.
 %FPGA-HPS-Bridge
 \subsection{HPS-FPGA-bridges}
