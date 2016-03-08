@@ -182,3 +182,4 @@ The preloader is the first stage of the user software. Therefore the functionali
 \subsection{UBoot-Loader}
 UBoot is an universal bootloader for a variety of devices, especially made for embedded systems. It was invented by DENX in 1999 and available under the GPL. UBoot can be configured using a command line interface, the configuration can be safed to flash devices. Typically the UBoot-loader sets up the device tree, loads the operating system kernel and hands over the user software control to the kernel.
 \subsection{Operating System}
+Generally each operating system can be loaded by the HPS as long as some requirements are fulfilled. The boot flow has to be the ability to be configured for the HPS. For this, beside others, drivers and a compiler for the ARM processor have to exist. Due to the fact that for Linux all requirements are fulfilled and the use is free of charge Linux is recommended by the Altera company.
