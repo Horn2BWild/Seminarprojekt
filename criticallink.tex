@@ -148,6 +148,7 @@ The specification of CAN can be found in \cite{boschcan91}, an even more detaile
 \subsection {SPI}
 The serial peripheral interface was introduced by Motorola as bus standard for synchronous full duplex operation. It is built up as master/slave system. The initialization of a data transfer is always done by the master, but data can be sent in both directions. SPI communication is done with 4 signals. In fact SPI is a very simple communication bus with no built in acknoledgement mechanism and no flow control. If those are needed they have to be implemented in additional hardware around or by communication protocols. SPI offers high data rates up to several Mbit/s, with a high potential in single master single slave configurations.\cite{SPI02}
 \subsection{USB}
+The Universal Serial Bus is a serial communication bus with a speed up to 4Gbit/s. Each bus is controlled by one host and can have up to 127 slaves, which are connected in a star topology. USB uses 4 wires, where two are transferring data using a NRZI encoding scheme, the other two have a DC power of 5V. These voltage is one of the main benefits of USB. Devices connected to an USB bus don't have to have external power supply if the bus is serving enough energy to power the device. A detailed description how USB works can be found in \cite{Pea10}. The full USB specification can be found at \cite{USB16}.
 \section{booting}
 For booting three different configuration options are possible:\cite[chapter A]{AlteraHPS15}
 \begin{itemize}
