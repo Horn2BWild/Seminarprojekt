@@ -145,6 +145,9 @@ The CAN-bus was developed by Bosch in the early 1980s as serial communication pr
 \item autonomous switching off of defect nodes
 \end{itemize}
 The specification of CAN can be found in \cite{boschcan91}, an even more detailed description in \cite{nxpcan98}.
+\subsection {SPI}
+The serial peripheral interface was introduced by Motorola as bus standard for synchronous full duplex operation. It is built up as master/slave system. The initialization of a data transfer is always done by the master, but data can be sent in both directions. SPI communication is done with 4 signals. In fact SPI is a very simple communication bus with no built in acknoledgement mechanism and no flow control. If those are needed they have to be implemented in additional hardware around or by communication protocols. SPI offers high data rates up to several Mbit/s, with a high potential in single master single slave configurations.\cite{SPI02}
+\subsection{USB}
 \section{booting}
 For booting three different configuration options are possible:\cite[chapter A]{AlteraHPS15}
 \begin{itemize}
