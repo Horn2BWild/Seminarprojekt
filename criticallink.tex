@@ -33,11 +33,17 @@ In this mode a adder with three inputs can be implemented. The ALM is configured
 A Cyclone V device has two different kinds of embedded memory which are 10kB blocks (called M10K) for providing memory for larger arrays and MLABs with 640 bit memory for smaller memory arrays. MLABs are optimized for implementing shift registers used by DSPs. The embedded memory of the Cyclone V device supports different memory modes:
 \begin{itemize}
 \item single-port RAM\\
+The single-port RAM mode supports only one read or write operation at one specific time.
 \item simple dual-port RAM\\
+In this mode one read and one write operation can be done at a time, when the read and write operation is done on different ports.
 \item true dual-port RAM\\
+In this mode all combinations of read/write at two ports can be done. This includes two read operations, two write operations or one write and one read operation on two ports at different frequencies. This mode is only supported by M10K memory blocks.
 \item shift register\\
+Logic cells and routing ressources for DSPs (like FIR, correlation functions or pseudo random number generators) can be implemented in this mode. Memory blocks can be cascaded to implement larger shift registers.
 \item ROM\\
+An embedded memory block can be used as ROM as well. This is similar to the single-port mode, disabling the possibility for write operations. The data is loaded in the memory using .mif or .hex-files.
 \item FIFOs\\
+FIFO buffers can be implemented using either M10K or MLAB memory cells. For smaller FIFOs MLABs are ideal for implementation, but mixed-width FIFOs are not supported using MLABs.
 \end{itemize}
 More information on embedded memory modes and clocking is available in \cite[chapter 1]{AlteraFPGA15}
 \subsection{Digital Signal Processing}
