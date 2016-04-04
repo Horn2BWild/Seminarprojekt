@@ -10,7 +10,7 @@ The Cyclone V SoC is built up of a FPGA and a dual-core ARM Cortex HPS. Both por
 \end{figure}
 \section{FPGA}
 \subsection{Logic Array Blocks (LAB)}
-LABs are basic building blocks, each consisting of 10 adaptive logic modules (ALM). They are freely configurable to build up logic functions, arithmetic or register functions. A quarter of the LABs is configurable as memory (MLAB). LABs can drive the own ALMs as well as the 20 ALMs of the adjacent LABs. The ALMs of one LAB can be driven by the own LAB and by DSP blocks using the direct link connection of the local interconnect. A ALM contains 4 registers, each having data, clock, clear and synchronous load ports. The ALMs of the Cyclone V device can operate in 4 different operating modes:
+LABs are basic building blocks, each consisting of 10 adaptive logic modules (ALM). They are freely configurable to build up logic functions, arithmetic or register functions. A quarter of the LABs is configurable as memory (MLAB), which is described in chapter \ref{chap:embmem}. LABs can drive the own ALMs as well as the 20 ALMs of the adjacent LABs. The ALMs of one LAB can be driven by the own LAB and by DSP blocks using the direct link connection of the local interconnect. A ALM contains 4 registers, each having data, clock, clear and synchronous load ports. The ALMs of the Cyclone V device can operate in 4 different operating modes\cite[chapter 1]{AlteraFPGA15}:
 \begin{itemize}
 \item normal mode\\
 In this mode up to 8 inputs from the local interconnect can be use to build up two functions with 4 inputs or one function with up to 6 inputs in one ALM. 
@@ -29,10 +29,21 @@ In the arithmetic mode two dedicated full adders are available to perform pre-ad
 In this mode a adder with three inputs can be implemented. The ALM is configured with 4 input LUTs, each LUT computes the sum of three inputs.
 \end{itemize}
 \subsection{Embedded Memory}
+\label{chap:embmem}
+A Cyclone V device has two different kinds of embedded memory which are 10kB blocks (called M10K) for providing memory for larger arrays and MLABs with 640 bit memory for smaller memory arrays. MLABs are optimized for implementing shift registers used by DSPs. The embedded memory of the Cyclone V device supports different memory modes:
+\begin{itemize}
+\item single-port RAM\\
+\item simple dual-port RAM\\
+\item true dual-port RAM\\
+\item shift register\\
+\item ROM\\
+\item FIFOs\\
+\end{itemize}
+More information on embedded memory modes and clocking is available in \cite[chapter 1]{AlteraFPGA15}
 \subsection{Digital Signal Processing}
 \subsection{Input/Output}
 \subsection{Power Management}
-
+It should be ensured that the read-enable signal is only set when necessary. When no read-during write is needed, the read-enable signal should be disabled. Due to this read operations occur less often and the AC power consumption can be lowered significantly when this is applied to each memory block.\cite[chapter 1]{AlteraFPGA15}
 \section{HPS}
 \begin{figure}[htbp]
 \begin{center}
