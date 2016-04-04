@@ -57,14 +57,25 @@ The Altera Cyclone V SoC contains some built-in DSP blocks for efficient signal 
 \end{figure}
 The DSP exists of following main components:
 \begin{itemize}
-\item Input register bank
-\item Pre-adder
-\item Internal coefficient
-\item Multipliers
-\item Adder
-\item Accumulator and chainout adder
-\item Systolic registers
-\item Double accumulation register
+\item Input register bank\\
+The positive edge-triggered input register bank consists of data, dynamic control signals, and two sets of delay registers. The delay registers can be used to fulfill latency requirements.
+\item Pre-adder\\
+In each DSP block exist two 19 bit pre-adders, which can be used either independent or combinend as one 27bit pre-adder.
+\item Internal coefficient\\
+For multiplications the multiplicand can be given in two ways. It can be read from the dynamic input or the internal coefficient. This internal coefficient supports up to 8 different coefficients.
+\item Multipliers\\
+One reason for using DSPs is the high performance of calculating huge amounts of data, especially given in matrizes. Due to this each DSP block has two multipliers for performing many multiplications in parallel. The multipliers can be configured in following operation modes:
+\begin{itemize}
+\item 1 27x27 multiplier
+\item 2 18x19 multipliers
+\item 3 9x9 multipliers
+\end{itemize}
+\item Adder\\
+The adder can be used as one 64bit adder, two 18x19 adders or three 9x9 adders, depending on the operational mode.
+\item Accumulator and chainout adder\\
+The accumulator supports double accumulation in the 64bit mode and is not available in the 18x19 mode as well as the 9x9 mode. The accumulation registers are set statically in the programming file. 
+\item Systolic registers\\
+The systolic registers are used to register the 18/19-bit inputs of the upper multiplier and to delay the chainout output to the next DSP block. It is used only in the systolic FIR mode and bypassed in all other modes. 
 \item Output register bank
 \end{itemize}
 \subsubsection{DSP operation modes}
