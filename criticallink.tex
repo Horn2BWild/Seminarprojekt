@@ -100,8 +100,7 @@ Those properties make FIR filters good suitable especially for phase-sensitive a
 y[n]=\sum_{i=1}^{k}c[i]x[n-i-1]
 \end{equation}
 As the delay can become large with an increasing number of additions, a systolic form of the equation is used to overcome this delay. For this additional delay elements are inserted to increase the calculation performance at the cost of increased latency. FIR calculations can be done using either 18 or 27 bit.
-\subsection{Input/Output}
-\subsection{Power Management}
+\subsection{Power Considerations}
 It should be ensured that the read-enable signal is only set when necessary. When no read-during write is needed, the read-enable signal should be disabled. Due to this read operations occur less often and the AC power consumption can be lowered significantly when this is applied to each memory block.\cite[chapter 1]{AlteraFPGA15}
 \section{HPS}
 \begin{figure}[htbp]
