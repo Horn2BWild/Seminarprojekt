@@ -79,12 +79,27 @@ The systolic registers are used to register the 18/19-bit inputs of the upper mu
 \item Output register bank
 \end{itemize}
 \subsubsection{DSP operation modes}
+In this part some important DSP operation modes of the built-in DSP block are described. Detailed block diagrams of the different operation modes can be found in \cite[chapter 3]{AlteraFPGA15}.
 \paragraph{Independent multiplier mode}
+In this mode individual multiplication operations for general purpose multipliers are done. Following configurations can be used: 9x9, 18x18, 18x19, 18x25, 20x24 and 27x27.
 \paragraph{Independent complex multiplier mode}
+The DSP also supports multiplication of complex numbers. This is available for 18x19 numbers and is done using the equation
+\begin{equation}
+(a+jb)\cdot (c+jd)=[(a\cdot c)-(b\cdot d)]+j[(a\cdot d)+(b\cdot d)]
+\end{equation}
+For the calculation 2 DSP blocks are used, one for calculating the real part, the other one for the calculation of the imaginary part.
 \paragraph{Systolic FIR mode}
+FIR filters have a impulse response which goes to zero in finite time. In comparison to IIR filters they have some useful properties:
+\begin{itemize}
+\item stability: As the number of inputs is limited, also the ouput of the filter has a limited value.
+\item no need for feedback
+\item can be designed to have linear phase.
+\end{itemize}
+Those properties make FIR filters good suitable especially for phase-sensitive applications like data communications. For this reason an own FIR mode is built-in in the DSP blocks. The FIR filter output is calculated using the following formula:
 \begin{equation}
 y[n]=\sum_{i=1}^{k}c[i]x[n-i-1]
 \end{equation}
+As the delay can become large with an increasing number of additions, a systolic form of the equation is used to overcome this delay. For this additional delay elements are inserted to increase the calculation performance at the cost of increased latency. FIR calculations can be done using either 18 or 27 bit.
 \subsection{Input/Output}
 \subsection{Power Management}
 It should be ensured that the read-enable signal is only set when necessary. When no read-during write is needed, the read-enable signal should be disabled. Due to this read operations occur less often and the AC power consumption can be lowered significantly when this is applied to each memory block.\cite[chapter 1]{AlteraFPGA15}
