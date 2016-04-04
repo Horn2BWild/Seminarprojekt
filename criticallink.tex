@@ -10,7 +10,24 @@ The Cyclone V SoC is built up of a FPGA and a dual-core ARM Cortex HPS. Both por
 \end{figure}
 \section{FPGA}
 \subsection{Logic Array Blocks (LAB)}
-
+LABs are basic building blocks, each consisting of 10 adaptive logic modules (ALM). They are freely configurable to build up logic functions, arithmetic or register functions. A quarter of the LABs is configurable as memory (MLAB). LABs can drive the own ALMs as well as the 20 ALMs of the adjacent LABs. The ALMs of one LAB can be driven by the own LAB and by DSP blocks using the direct link connection of the local interconnect. A ALM contains 4 registers, each having data, clock, clear and synchronous load ports. The ALMs of the Cyclone V device can operate in 4 different operating modes:
+\begin{itemize}
+\item normal mode\\
+In this mode up to 8 inputs from the local interconnect can be use to build up two functions with 4 inputs or one function with up to 6 inputs in one ALM. 
+\item extended LUT mode\\
+In this mode functions with 7 inputs can be implemented, if they fit into a template shown in figure \ref{fig:extendedlutfigure}. In HDLs those functions are often designed as if/else-statements.
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[width=10cm,keepaspectratio=true]{bilder/png/extendedlutfigure}
+\caption{Template for functions in extended LUT mode\cite[chapter 1]{AlteraFPGA15}}
+\label{fig:extendedlutfigure}
+\end{center}
+\end{figure}
+\item arithmetic mode\\
+In the arithmetic mode two dedicated full adders are available to perform pre-adder logic by the LUTs. Additional two functions with 4 inputs can be implemented, and the results of those functions added using the full adders.
+\item shared arithmetic mode\\
+In this mode a adder with three inputs can be implemented. The ALM is configured with 4 input LUTs, each LUT computes the sum of three inputs.
+\end{itemize}
 \subsection{Embedded Memory}
 \subsection{Digital Signal Processing}
 \subsection{Input/Output}
