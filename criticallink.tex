@@ -45,8 +45,35 @@ An embedded memory block can be used as ROM as well. This is similar to the sing
 \item FIFOs\\
 FIFO buffers can be implemented using either M10K or MLAB memory cells. For smaller FIFOs MLABs are ideal for implementation, but mixed-width FIFOs are not supported using MLABs.
 \end{itemize}
-More information on embedded memory modes and clocking is available in \cite[chapter 1]{AlteraFPGA15}
+More information on embedded memory modes and clocking is available in \cite[chapter 2]{AlteraFPGA15}
 \subsection{Digital Signal Processing}
+The Altera Cyclone V SoC contains some built-in DSP blocks for efficient signal processing. A block diagram of the used DSP architecture built is shown in figure \ref{fig:fpgadsp}.
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[width=15cm,keepaspectratio=true]{bilder/png/fpgadsp}
+\caption{Cyclone V DSP architecture\cite[chapter 3]{AlteraFPGA15}}
+\label{fig:fpgadsp}
+\end{center}
+\end{figure}
+The DSP exists of following main components:
+\begin{itemize}
+\item Input register bank
+\item Pre-adder
+\item Internal coefficient
+\item Multipliers
+\item Adder
+\item Accumulator and chainout adder
+\item Systolic registers
+\item Double accumulation register
+\item Output register bank
+\end{itemize}
+\subsubsection{DSP operation modes}
+\paragraph{Independent multiplier mode}
+\paragraph{Independent complex multiplier mode}
+\paragraph{Systolic FIR mode}
+\begin{equation}
+y[n]=\sum_{i=1}^{k}c[i]x[n-i-1]
+\end{equation}
 \subsection{Input/Output}
 \subsection{Power Management}
 It should be ensured that the read-enable signal is only set when necessary. When no read-during write is needed, the read-enable signal should be disabled. Due to this read operations occur less often and the AC power consumption can be lowered significantly when this is applied to each memory block.\cite[chapter 1]{AlteraFPGA15}
