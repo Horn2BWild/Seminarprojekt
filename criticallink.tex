@@ -8,7 +8,9 @@ The Cyclone V SoC is built up of a FPGA and a dual-core ARM Cortex HPS. Both por
 \label{fig:alterasocblocks}
 \end{center}
 \end{figure}
+%FPGA Field Programmable Gate Array
 \section{FPGA}
+The FPGA portion of the Altera SoC is made for logic operations and high speed calculations, especially of matrices. Generally it can be said, that everything which can be defined by the FPGA block layout is implementable. So also interfaces like SPI or I$^2$C can be implemented in the FPGA. A FPGA consists of some main building blocks, which  are described below.
 \subsection{Logic Array Blocks (LAB)}
 LABs are basic building blocks, each consisting of 10 adaptive logic modules (ALM). They are freely configurable to build up logic functions, arithmetic or register functions. A quarter of the LABs is configurable as memory (MLAB), which is described in chapter \ref{chap:embmem}. LABs can drive the own ALMs as well as the 20 ALMs of the adjacent LABs. The ALMs of one LAB can be driven by the own LAB and by DSP blocks using the direct link connection of the local interconnect. A ALM contains 4 registers, each having data, clock, clear and synchronous load ports. The ALMs of the Cyclone V device can operate in 4 different operating modes\cite[chapter 1]{AlteraFPGA15}:
 \begin{itemize}
