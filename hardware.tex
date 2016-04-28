@@ -211,8 +211,6 @@ The removal time is like the hold time for asynchronous devices.
 The propagation delay is the time the flipflop needs to change the output state after the rising clock edge occured. In some cases the delay times for low-to-high transition is not equal the high-to-low transition time. The propagation delay times are denoted in the datasheets. For correct operation of the flipflop the clock time has to be lower than $t_{S}+t_{H}$.
 \end{itemize}
 \subsection{clock}
-
-\subsubsection{clock generation}
 In this part some possibilities to generate the clock signal are explained.
 \paragraph{resonant circuit\\}
 The most simple form of generating an oscillating signal is a circuit consisting of a capacitor, inductor and resistor. It oscillates due to the interaction of the magnetic field of the inductor and the electric field of the capacitor. When the capacitor is charged, current flows through the inductor building up a magnetic field. As the capacitor will be decharged the voltage decreases. The magnetic field is a maximum when the capacitor voltage reaches 0. Now the capacitor will start to charge with negative current increasing the electric field while the magnetic field decreases. The circuit starts to oscillate according to Faraday's law. The natural frequency of the oscillation can be determined using
