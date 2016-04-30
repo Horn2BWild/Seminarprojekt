@@ -1,3 +1,16 @@
 \chapter{Conclusion}
 %Applications
   \label{kap:ausblick}
+  Systems on chip are such systems which combine logic processing in FPGAs with general purpose processors on one chip. Thus SoCs are very flexible systems in a hardware designers view. Everything which is implementable by combining the existing HPS and the FPGA logic blocks can be done. This means in no case that the users have those flexibility as well. The end user is always fixed to the layout which the hardware designer has built up.\\
+  SoCs have many hardware components on small space and have the possibility for power efficient calculations. The general purpose processor system has the ability to run a whole linux distribution. Therefore every program which is compiled for that system, and for which all dependencies are fulfilled, can be executed. In some cases additional interfaces which are not available in the HPS, can be implemented in the FPGA. Also some intensive calculations like matrix operations, as well as logic operations, can be done in the FPGA. For this reason very efficient calculations can be done. Combining HPS and FPGA, SoCs are suitable for a wide range of applications. Those applications can use the SoC in following ways:
+ \begin{itemize}
+ \item HPS only\\
+ In this case the FPGA portion is not in use, every operation is done on the processor system. As the HPS can run a Linux system all programs which are compiled for that system can be executed. 
+ \item HPS + FPGA (without I/O)\\
+ In this case both the HPS and the FPGA are in use, but the FPGA does not use own inputs. That means that data is moved from memory to the FPGA for calculation purposes and written back to the memory. 
+ \item HPS + FPGA (with I/O)\\
+ If the FPGA has own I/O-pins, it can fetch data for it's own. This is the case if whole interfaces are implemented in the FPGA. 
+ \end{itemize}
+ For every application which shall be executed on the SoC the tradeoff between calculation speed and power usage should be determined. As the need of power is proportional to the clock frequency, the processing speed should always be as low as it is possible for the specific purpose. Further the decision if the FPGA is used should be made.\\
+  Due to the flexibility in using the hardware elements of the SoC more and more applications and systems use SoCs for calculations. In that way it is quite clear that also satellite systems use such systems. Implementing SoCs as main processing units in extraterrestrial systems gives them the ability to run different applications and experiments on only one satellite. Due to this reason costs for experiments can decreased significantly. Furthermore testing of software can be done in in-orbit flight conditions. As SoCs are small devices with low power requirements the size and weight of satellites can be reduced and so the costs for lifting them off to orbits can be lowered.
+ 
