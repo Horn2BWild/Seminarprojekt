@@ -1,33 +1,33 @@
 \chapter{Integrated Circuits}
 \label{kap:hardware}
-Typical electronic circuits are made of different electronic components, such as resistors, capacitors and transistors. Building them up in a discrete way needs much space and so those devices are miniaturized and built up on one semiconductor plate to an IC. In that way millions of transistors can be placed on a chip in the size of some cm$^2$. The miniaturization of electronic circuits gives some important advantages:
+Typical electronic circuits are made of different electronic components, such as resistors, capacitors and transistors. Building them up in a discrete way needs much space and so those devices are miniaturized and built up on one semiconductor plate to an IC. In that way, millions of transistors can be placed on a chip of the size of some cm$^2$. The miniaturization of electronic circuits gives some important advantages:
 \begin{itemize}
-\item low size: thousands of transistors can be placed on one chip.
-\item low power dissipation: Due to smaller component sizes the energy usage is lower and so less power is dissipated by heat.
-\item high processing speed due to short wiring length
+\item low size: thousands of transistors can be placed on one chip;
+\item low power dissipation: Due to smaller component sizes the energy usage is lower and so less power is dissipated by heat;
+\item high processing speed due to short wiring length; and
 \item low costs due to mass production. Several ICs can be manufactured on one waver plate in one production process.
 \end{itemize}
-\section{power consumption of ICs}
-In digital systems the power consumption has an important role. Especially in mobile or space systems where the amount of available energy is limited, the power usage of the system should be analyzed. As the power consumption is depending on frequency and supply voltage, decreasing any of them is advantageous. Due to less heat dissipation stress gradients associated to heat are decreased. Furthermore the limited power on mobile or space devices can be used more efficiently.\\
-Digital systems both need dynamic and static power, where the whole power demand is calculated as
+\section{Power consumption of ICs}
+In digital systems the power consumption plays an important role. Especially in mobile or space systems where the amount of available energy is limited, the power usage of the system should be analyzed. As the power consumption depends on frequency and supply voltage, decreasing any of them is advantageous. Due to less heat dissipation, stress gradients associated to heat are decreased. Furthermore the limited power on mobile or space devices can be used more efficiently.\\
+Digital systems need both dynamic and static power, where the whole power demand is calculated as
 \begin{equation}
-P=P_{static}+P_{dynamic}
+P=P_{static}+P_{dynamic}\;.
 \end{equation}
-\subsection{static power consumption}
-Generally CMOS devices have a low static power consumption. This consumption occurs when no states are changed and is constant. Static power consumption occurs due to reverse-bias leakage between diffused regions and the substrate.\cite{Sar97} With improving manufacturing technologies the gate thicknesses decrease and so the probability for tunneling effects increases. For this reason leakage currents are increasing with increasing technologies.\cite{Iye10} The total leakage current between the supply voltage $V_{DD}$ and ground can be determined by
+\subsection{Static power consumption}
+Generally CMOS devices have a low static power consumption. This consumption occurs when no states are changed and when they are constant. Static power consumption occurs due to reverse-bias leakage between diffused regions and the substrate.\cite{Sar97} With improving manufacturing technologies, the gate thicknesses decrease and consequently the probability for tunneling effects increases. For this reason, leakage currents are increasing with increasing technologies.\cite{Iye10} The total leakage current between the supply voltage $V_{DD}$ and ground can be determined by
 \begin{equation}
-P_{static}=I_{DD}\cdot V_{DD}
+P_{static}=I_{DD}\cdot V_{DD}\;.
 \end{equation}
-\subsection{dynamic power consumption}
-Every wire and logic gate has capacitive effects. When an IC is switching from one state to another state those capacities have to be charged. The energy to charge from 0 to the supply voltage $V_{DD}$ can be determined by $C\cdot V_{DD}^2$. When the capacities are discharged from $V_{DD}$ to 0 no power from the supply is used\cite{Har13}, therefore discharging has not to be modelled for power considerations. Assuming the IC to be clocked with frequency $f$, there are $\frac{f}{2}$ charging processes as well as $\frac{f}{2}$ discharging processes per second. In this way the maximum dynamic power can be calculated by
+\subsection{Dynamic power consumption}
+Every wire and logic gate has capacitive effects. When an IC switches from one state to another state, those capacities have to be charged. The energy to charge from 0 to the supply voltage $V_{DD}$ can be determined by $C\cdot V_{DD}^2$. When the capacities are discharged from $V_{DD}$ to 0, no power from the supply is used\cite{Har13}, therefore discharging does not have to be modelled for power considerations. Assuming the IC to be clocked with frequency $f$, there are $\frac{f}{2}$ charging processes as well as $\frac{f}{2}$ discharging processes per second. In this way, the maximum dynamic power can be calculated by
 \begin{equation}
-P_{dynamic}=\frac{f}{2}\cdot C\cdot V_{DD}^2
+P_{dynamic}=\frac{f}{2}\cdot C\cdot V_{DD}^2\;.
 \end{equation}
-\subsection{observations on power consumption}
-As the total power consumption of an IC can be seen as $P=V_{DD}*\big(I_{DD}+\frac{1}{2}\cdot f\cdot C\cdot V_{DD}\big)$, the consumption can be lowered when decreasing the supply voltage $V_{DD}$ and the frequency $f$. For correct operation of semiconductor devices like transistors and diodes, the treshold voltage have to be exceeded, so the supply voltage can not be decreased boundless. Therefore the exact need of calculation speed should be observed in advance, and in that way the clock rate of ICs set to the lowest possible frequency which is well adapted for reasonable operation. 
+\subsection{Observations on power consumption}
+As the total power consumption of an IC can be seen as $P=V_{DD}*\big(I_{DD}+\frac{1}{2}\cdot f\cdot C\cdot V_{DD}\big)$, the consumption can be lowered when decreasing the supply voltage $V_{DD}$ and the frequency $f$. For correct operation of semiconductor devices like transistors and diodes, the threshold voltage has to be exceeded, so the supply voltage can not be decreased boundlessly. Therefore the exact need of calculation speed should be observed in advance, and in that way the clock rate of ICs should be set to the lowest possible frequency which is well adapted for reasonable operation. 
 \section{IC types}
 Generally ICs can be subdivided in two groups. If they are used for different purposes like microprocessors, they are called \textit{general purpose IC}. Otherwise if they are used only for specific applications they are \textit{application specific ICs}. ASICs and FPGAs are typical types of application-specific chips.
-\subsection{microprocessor}
+\subsection{Microprocessor}
 Microprocessors are built up as general purpose processors to compute a whole set of commands called machine language. The machine code then is a long sequence of operations. For executing a program the operation code (opcode) is fetched into the instruction register. The address for the next opcode is stored in the program counter. A microprocessor contains mainly following blocks as shown in figure \ref{fig:microprocessorblockdiagram}:
 \begin{itemize}
 \item Arithmetical Logical Unit (ALU)\\
@@ -85,7 +85,7 @@ The most common FPGA type is SRAM-based. SRAM cells are typically made of 4 to 6
 \label{fig:SRAMaufbau}
 \end{center}
 \end{figure}
-\subsubsection{antifuse-based devices}
+\subsubsection{Antifuse-based devices}
 Antifuse-based devices are OTP. The programming is done with special programming devices. For manufacturing those devices special materials, eg. non-conducting amorphous silicon, are used.\cite{Zeif2011} When antifuse-based devices are programmed, conducting channels are made by high voltage. This can be seen in figure \ref{fig:antifusevorhernachher}. So when antifuse-based FPGAs are programmed the configuration is permanent. This leads to the fact that the configuration of the device is non-volatile and available at power-on. The configuration can be hidden due to special security antifuses. Due to the fact that the device is OTP, no additional memory is needed to store the configuration. The disadvantage of this device is that it can be programmed only once and so it is not suitable for prototyping or changing configurations. Furthermore the programming can only be done off-line.\\
 Antifuse-based configurations are radiation hard and therefore suitable for military or space environments.\cite{Maxfield2009} It must be pointed out, that only the configuration is naturally radiation hard, and attached components have to be made radiation hard (shielding, TRD) as well. As antifuses need more manufacturing steps than SRAM-based devices, antifuse-based devices are some technology generations behind.
 \begin{figure}[htbp]
@@ -95,7 +95,7 @@ Antifuse-based configurations are radiation hard and therefore suitable for mili
 \label{fig:antifusevorhernachher}
 \end{center}
 \end{figure}
-\subsubsection{flash-based devices}
+\subsubsection{Flash-based devices}
 Flash-based devices can be electrically programmed and erased, so that they can be configured over and over again. This can be done offline or online via special programming interfaces (in-circuit programmable). The memory is non-volatile and so the configuration can be stored even after power-off. As disadvantages the relatively high static power consumption\cite{Qui16} as well as device altering due to programming cycles have to bementioned. Flash-based devices contain a large number of flash-cells, which use two floating-gate transistors for storing data. A floating-gate transistor can be seen in figure \ref{fig:FlashTransistor}\\
 \textit{The floating-gate is isolated, insulated all around by an oxide layer, with no electrical contacts. This means that any electrons placed on the floating-gate are literally trapped until removed. This persistence is the foundation for using flash memory as storage.}\cite{Flash16}\\
 A detailed description of the operating of floating-gate transistors can be found at \cite{Cse16}.\\
@@ -109,7 +109,7 @@ A detailed description of the operating of floating-gate transistors can be foun
 \end{figure}
 \section{Hardware elements}
 In this section some important hardware elements are explained.
-\subsection{flip-flops}
+\subsection{Flip-flops}
 \label{ch:flipflops}
 Flipflops are basic logic elements with 2 stable states. They consist of a data input and a clock input, as well as a data output. Optionally a set/reset-pin or an inverted output can be available. Fliipflops are used as memory elements. Simplified, a logical state at the data input is stored at the rising edge of the clock signal, and held stable to the output until the next rising edge occures. The most used flipflop is the D-flipflop.
 \begin{figure}
@@ -196,7 +196,7 @@ The D-flipflop is the most used flipflop.It can be seen in figure \ref{fig:dflip
 
 \end{itemize}
 
-\subsubsection{timing properties}
+\subsubsection{Timing properties}
 When using flip-flops some timing parameters are important (seen in figure \ref{fig:flipfloptiming}) and explained below.
 \begin{itemize}
 \item setup time $t_{S}$\\
@@ -210,9 +210,9 @@ The removal time is like the hold time for asynchronous devices.
 \item propagation delay $t_{P}$, $t_{CO}$\\
 The propagation delay is the time the flipflop needs to change the output state after the rising clock edge occured. In some cases the delay times for low-to-high transition is not equal the high-to-low transition time. The propagation delay times are denoted in the datasheets. For correct operation of the flipflop the clock time has to be lower than $t_{S}+t_{H}$.
 \end{itemize}
-\subsection{clock}
+\subsection{Clock}
 In this part some possibilities to generate the clock signal are explained.
-\paragraph{resonant circuit\\}
+\paragraph{Resonant circuit\\}
 The most simple form of generating an oscillating signal is a circuit consisting of a capacitor, inductor and resistor. It oscillates due to the interaction of the magnetic field of the inductor and the electric field of the capacitor. When the capacitor is charged, current flows through the inductor building up a magnetic field. As the capacitor will be decharged the voltage decreases. The magnetic field is a maximum when the capacitor voltage reaches 0. Now the capacitor will start to charge with negative current increasing the electric field while the magnetic field decreases. The circuit starts to oscillate according to Faraday's law. The natural frequency of the oscillation can be determined using
 \begin{equation}
 f_0=2\pi\omega_0
@@ -222,7 +222,7 @@ with
 \omega_0=\frac{1}{\sqrt{LC}}
 \end{equation}
 RLC-circuits are used in many different applications, eg. for tuning radios or as frequency filters. The disadvantages of this type of resonator are the relatively low Q-factor and the fact that resonance frequency is not stable to temperature changes.
-\paragraph{crystal oscillator\\}
+\paragraph{Crystal oscillator\\}
 One of the most important things of oscillators is frequency stability. High stability referring to temperature or changes in the supply voltages is given using quartz crystals. A quartz crystal is a silicon oxide with defined shape and size. Both sides are metallized. When a voltage is applied, a piezo-electric effect occurs and the generated mechanical force leads to electrical charges. As the physical shape can not be changed after production, the frequency stays constant and is inverse proportional to the thickness of the crystal. The symbol of crystal oscillators in electric circuits is shown in figure \ref{fig:crystaloscillatorsymbol}.
 \begin{figure}[htbp]
 \begin{center}
@@ -231,7 +231,7 @@ One of the most important things of oscillators is frequency stability. High sta
 \label{fig:crystaloscillatorsymbol}
 \end{center}
 \end{figure}
-\paragraph{phase-locked loop\\}
+\paragraph{Phase-locked loop\\}
 A PLL is a system, which allows a signal to stay constant to an external reference clock. A block diagram of a PLL is shown in figure \ref{fig:pllblocks}. As reference clock most times a crystal oscillator is used. The reference clock signal is divided and the phase of this reference signal is compared with the output of the PLL. What the PLL now does is to keep the phase between the two signals constant (as it can be seen in figure \ref{fig:pllphase}). For this the error signal, given by the phase comparator, is lead to a VCO . This signal is divided by another divider and fed back to the phase comparator.\\
 In comparison to other oscillators with variable frequency the long term stability is very high. The dividers can be changed very quickly and so frequency changes can be realized easily. Furthermore the divider values can be configured digitally and so remote modification is possible. As disadvantages higher phase noise and the complexity of the systems have to be mentioned.
 \begin{figure}[htbp]
