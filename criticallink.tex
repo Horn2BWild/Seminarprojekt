@@ -107,15 +107,15 @@ As the delay can become large with an increasing number of additions, a systolic
 It should be ensured that the read-enable signal is only set when necessary. When no read-during write is needed, the read-enable signal should be disabled. Due to this, read operations occur less often and the AC power consumption can be lowered significantly when this is applied to each memory block.\cite[chapter 1]{AlteraFPGA15} Generally, when using the system in a power-critical environment like in space, it should be noted that when using the FPGA, the overall power consumption is higher than when using only the HPS. Accordingly, the tradeoff between higher calculation speed for specific purposes and higher power consumption of the system should be compared.
 %HPS Hard Processor System
 \section{HPS}
-One of the main parts of the Altera SoC is the hard processor system (HPS). It offers a microprocessor system for general purpose use. For procesing a dual-core processor is used. A main task of the HPS is to connect to peripherals. Also the connection to the FPGA portion is done and controlled using the HPS. The speed of the HPS is not only depending on the clock frequency of the MPU core, but also from cache speed and the speed of the data flow generating input for the MPU core. The main parts of the HPS, shown in figure \ref{fig:alterahpsblocks}, are described below.
+One of the main parts of the Altera SoC is the hard processor system (HPS). It offers a microprocessor system for general purpose use. For procesing, a dual-core processor is used. A main task of the HPS is to connect to peripherals. Moreover, the connection to the FPGA portion is done and controlled using the HPS. The speed of the HPS does not only depend on the clock frequency of the MPU core, but also on cache speed and the speed of the data flow generating input for the MPU core. The main parts of the HPS, shown in figure \ref{fig:alterahpsblocks}, are described below.
 \subsection{System interconnect}
 The data exchange between different hardware blocks of the HPS is done via the interconnect system, consisting of the L3 main interconnect and the L4 bus system. Furthermore the L3 system has 3 major parts:
 \begin{itemize}
-\item L3 interconnect, with a data width of 64 bit. It is used to connect master blocks to slaves like SDRAM controller subsystem, on-chip memories or the FPGA manager.
+\item L3 interconnect, with a data width of 64 bit. It is used to connect master blocks to slaves like the SDRAM controller subsystem, on-chip memories or the FPGA manager.
 \item L3 master peripheral switch. This part has a data witdh of 32 bit and is used for memory-mastering peripherals.
 \item L3 slave peripheral switch. Masters of the master peripheral switch and the interconnect use this block for interconnect. The data width is 32 bit. Furthermore the L3 slave peripheral switch has 5 different L4 buses.
 \end{itemize}
-While the master peripheral as well as the slave peripheral switch are fully connected crossbars, the L3 interconnect is partially connected. Therefore a data exchange is only possible for predefined block combinations. Those can be found in \cite[chapter 7]{AlteraHPS15}.
+While the master peripheral as well as the slave peripheral switch are fully connected crossbars, the L3 interconnect is partially connected. Therefore a data exchange is only possible for predefined block combinations. These can be found in \cite[chapter 7]{AlteraHPS15}.
 \begin{figure}[htbp]
 \begin{center}
 \includegraphics[width=15cm,keepaspectratio=true]{bilder/png/AlteraHPSneu}
@@ -125,9 +125,9 @@ While the master peripheral as well as the slave peripheral switch are fully con
 \end{figure}
 %MPU subsystem
 \subsection{MPU subsystem}
-The HPS consists mainly of a 32-bit dual-core ARM Cortex A9 microprocessor, with 32kB instruction cache and 32kB data cache for each processor core. The two caches are independent and therefore simultaneous loading of instructions and data. Each cache supports parity checking. The latency of loading data depends on the availability of the data. In case of data and instruction are available in the L1 cache the hit takes 1 clock cycle, if it is available in the L2 cache the best case is 6 cycles. If the data is not available in a cache the latency vary depending on other operations. For this a so called preload engine (PLE) is implemented. This hardware block allows the L2 cache to preload different memory regions defined by software control. Furthermore the endianess of the system can be configured.\\
-In a shared system with multi-processing possibilities and a single data source a hardware block to ensure coherency between processor cores and to ensure data consistency is needed. For this reason a snoop control unit (SCU) is implemented. This unit manages the data traffic for all Cortex A9 processor cores and the memory system including the L2 cache. In case of a SMP configuration also the data caches are maintained. Coherency of the instruction caches is not maintained in the SMP nor in the AMP configuration. Implementation details of the SCU can be found in \cite[chapter 9]{AlteraHPS15}.\\
-For an efficient calculation of floating point operations a FPU with full support of IEEE-754 half, full and double precision data is available, as well as convertion functionality between integer and floating point data types. For fast calculation of signal processing applications such as video and audio processing an additional block called multimedia processing engine (MPE) is implemented. The MPE supports SIMD processing. The principle of SIMD is shown in figure \ref{fig:alterahpssimd}.
+The HPS consists mainly of a 32-bit dual-core ARM Cortex A9 microprocessor, with 32 kB instruction cache and 32 kB data cache for each processor core. The two caches are independent and therefore simultaneous loading  instructions and data. Each cache supports parity checking. The latency of loading data depends on the availability of the data. In case data and instructions are available in the L1 cache, the hit takes 1 clock cycle, if it is available in the L2 cache the best case is 6 cycles. If the data is not available in a cache, the latency varies depending on other operations. For this, a so called preload engine (PLE) is implemented. This hardware block allows the L2 cache to preload different memory regions defined by software control. Furthermore the endianess of the system can be configured.\\
+In a shared system with multi-processing possibilities and a single data source, a hardware block to ensure coherency between processor cores and to ensure data consistency is needed. For this reason, a snoop control unit (SCU) is implemented. This unit manages the data traffic for all Cortex A9 processor cores and the memory system including the L2 cache. In case of a SMP configuration, also the data caches are maintained. Coherency of the instruction caches is not maintained in the SMP nor in the AMP configuration. Implementation details of the SCU can be found in \cite[chapter 9]{AlteraHPS15}.\\
+For an efficient calculation of floating point operations, a FPU with full support of IEEE-754 half, full and double precision data is available, as well as convertion functionality between integer and floating point data types. For fast calculation of signal processing applications such as video and audio processing, an additional block called multimedia processing engine (MPE) is implemented. The MPE supports SIMD processing. The principle of SIMD is shown in figure \ref{fig:alterahpssimd}.
 \begin{figure}[htbp]
 \begin{center}
 \includegraphics[width=12cm,keepaspectratio=true]{bilder/png/SIMD}
@@ -137,20 +137,20 @@ For an efficient calculation of floating point operations a FPU with full suppor
 \end{figure}
 %SDRAM Controller Subsystem
 \subsection{SDRAM controller subsystem}
-The HPS SDRAM controller subsystem is used to access an external SDRAM memory with size of up to 4 GB for following elements and interfaces:
+The HPS SDRAM controller subsystem is used to access an external SDRAM memory with size of up to 4 GB for the following elements and interfaces:
 \begin{itemize}
-\item the MPU subsystem: dedicated 64-bit AXI interface.
-\item the FPGA portion: The interface consists of 64-bit read data ports, 64-bit write data ports and command ports to build up three AXI interfaces or six Avalon-MM interfaces in total.
-\item the L3 interconnect: dedicated 32-bit AXI interface.
+\item The MPU subsystem: dedicated 64-bit AXI interface.
+\item The FPGA portion: the interface consists of 64-bit read data ports, 64-bit write data ports and command ports to build up three AXI interfaces or six Avalon-MM interfaces in total.
+\item The L3 interconnect: dedicated 32-bit AXI interface.
 \end{itemize}
-Therefore this subsystem provides an interface between the HPS and the FPGA portion. The SDRAM controller can be subdivided in a MPFE and a single-port controller. While the single-port controller communicates with each external memory device, the MPFE provides several interfaces to the single-port controller through different FIFOs. As external memories DDR2, DDR3 and LPDDR2 devices can be used. Implementation details of the SDRAM controller subsystem can be found in \cite[chapter 11]{AlteraHPS15}.
+Therefore this subsystem provides an interface between the HPS and the FPGA portion. The SDRAM controller can be subdivided into an MPFE and a single-port controller. While the single-port controller communicates with each external memory device, the MPFE provides several interfaces to the single-port controller through different FIFOs. As external memories, DDR2, DDR3 and LPDDR2 devices can be used. Implementation details of the SDRAM controller subsystem can be found in \cite[chapter 11]{AlteraHPS15}.
 %SD/MMC-Controller
 \subsection{SD/MMC-Controller}
-As the internal memory of the Altera SoC has a very limited On-Chip memory, the storage of preloaders and operating systems for the HPS on external memory devices is very useful. For this reason a SD/MMC controller for using SD and MMC flash cards as well as CE-ATA hard drives is implemented. The HPS has access to this controller with a 32-bit bus via the L3 interconnect. The SD/MMC-controller supports voltage levels of 3.3V and, if it is supported by the card after power up, 1.8V. It has to be noted that that kind of voltage switching is not supported by the controller itself but can be done using GPIO. Implementation details can be found in \cite[chapter 14]{AlteraHPS15}.
+As the internal memory of the Altera SoC has a very limited on-Chip memory, the storage of preloaders and operating systems for the HPS on external memory devices is very useful. For this reason, a SD/MMC controller for using SD and MMC flash cards as well as CE-ATA hard drives is implemented. The HPS has access to this controller with a 32-bit bus via the L3 interconnect. The SD/MMC-controller supports voltage levels of 3.3 V and, if it is supported by the card after power up, 1.8 V. It has to be noted that that kind of voltage switching is not supported by the controller itself but can be done using GPIO. Implementation details can be found in \cite[chapter 14]{AlteraHPS15}.
 %System interconnect
 %Clock manager
 \subsection{Clock Manager}
-In the HPS different clocks organized in clock groups are used. Every clock is derived of the two main clocks \texttt{HPS\_CLK1} and \texttt{HPS\_CLK2} of the system. The clock generation of the HPS is done by the clock manager hardware block, shown in figure \ref{fig:hpsclockmanager}. 
+In the HPS, different clocks organized in clock groups are used. Every clock is derived of the two main clocks \texttt{HPS\_CLK1} and \texttt{HPS\_CLK2} of the system. The clock generation of the HPS is done by the clock manager hardware block, shown in figure \ref{fig:hpsclockmanager}. 
 \begin{figure}[htbp]
 \begin{center}
 \includegraphics[width=15cm,keepaspectratio=true]{bilder/png/hpsclockmanager}
@@ -158,20 +158,21 @@ In the HPS different clocks organized in clock groups are used. Every clock is d
 \label{fig:hpsclockmanager}
 \end{center}
 \end{figure}
-A derivation of the different clocks is done using a PLL, where the frequency is set with a VCO. Dividers are used to lower the generated frequency. For generating clocks three PLLs are available. The clock manager contains 4 different clock groups:
+A derivation of the different clocks is done using a PLL, where the frequency is set with a VCO. Dividers are used to lower the generated frequency. For generating clocks, three PLLs are available. The clock manager contains 4 different clock groups:
 \begin{itemize}
 \item OSC1 clock group\\
-This clock group has only one clock which is not divided and directly taken from the \texttt{HPS\_CLK1} as input for a PLL. It is used for OSC1-driven peripherals.
-\item main clock group\\
+The OSC1 clock group has only one clock which is not divided and directly taken from the \texttt{HPS\_CLK1} as input for a PLL. It is used for OSC1-driven peripherals.
+\item Main clock group\\
 The PLL input of this group is derived of the \texttt{HPS\_CLK1}. It contains 5 dividers to generate different clocks for the MPU, SD/MMC-controller or, among others, the system interconnect.
-\item peripheral clock group\\
-This group is used for clocking interfaces like USB, CAN and GPIO. The PLL can be sourced either from \texttt{HPS\_CLK1}, \texttt{HPS\_CLK2} or the \texttt{f2h\_periph\_ref\_clk} provided by the FPGA. The peripheral clock group has 5 dividers to provide 5 different clocks.
+\item Peripheral clock group\\
+The peripheral clock group is used for clocking interfaces like USB, CAN and GPIO. The PLL can be sourced either from \texttt{HPS\_CLK1}, \texttt{HPS\_CLK2} or the \texttt{f2h\_periph\_ref\_clk} provided by the FPGA. The peripheral clock group has 5 dividers to provide 5 different clocks.
 \item SDRAM clock group\\
 The SDRAM clock group can use the  \texttt{HPS\_CLK1}, \texttt{HPS\_CLK2} or the \texttt{f2h\_sdram\_ref\_clk} clock provided by the FPGA for the SDRAM PLL.
 \end{itemize}
 A detailed description of the different clocks generated in the clock groups can be found in \cite[chapter 2]{AlteraHPS15}.
 \subsubsection{Considerations on the used PLL}
-The VCOs of the used PLLs have frequency stability up to +/- 20 percent of the used frequency and does not lose the PLL locking within this range. So when there is a need for changing the frequency more than 20 percent a slow ramp up or down of the VCO is a possibility to change frequency without loosing the lock. An other possibility, when e.g. lowering the frequency to the half is to decrease the frequency by 20 percent for three times and divide it by 2.4 percent in a last step.
+The VCOs of the used PLLs have frequency stability up to $\newcommand*\rfrac[2]{{}^{#1}\!/_{#2}}
+\rfrac{+}{-}$20 percent of the used frequency and does not lose the PLL locking within this range. So when there is a need for changing the frequency more than 20 percent a slow ramp up or down of the VCO is a possibility to change frequency without loosing the lock. An other possibility, when e.g. lowering the frequency to the half is to decrease the frequency by 20 percent for three times and divide it by 2.4 percent in a last step.
 %System manager
 \subsection{System Manager}
 The system manager connects modules for system level functions like the DMA controller or the SD/MMC-controller. Furthermore it contains CSRs to monitor and control functions by software access. The system manager also contains information about boot configurations and defines which bootROM-code to execute. Detailed descriptions of how the system manager works and how the different controllers of the system manager are defined can be found in \cite[chapter 5]{AlteraHPS15}.
