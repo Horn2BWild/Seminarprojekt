@@ -171,14 +171,13 @@ The SDRAM clock group can use the  \texttt{HPS\_CLK1}, \texttt{HPS\_CLK2} or the
 \end{itemize}
 A detailed description of the different clocks generated in the clock groups can be found in \cite[chapter 2]{AlteraHPS15}.
 \subsubsection{Considerations on the used PLL}
-The VCOs of the used PLLs have frequency stability up to $\newcommand*\rfrac[2]{{}^{#1}\!/_{#2}}
-\rfrac{+}{-}$20 percent of the used frequency and does not lose the PLL locking within this range. So when there is a need for changing the frequency more than 20 percent a slow ramp up or down of the VCO is a possibility to change frequency without loosing the lock. An other possibility, when e.g. lowering the frequency to the half is to decrease the frequency by 20 percent for three times and divide it by 2.4 percent in a last step.
+The VCOs of the used PLLs have frequency stability up to $\newcommand*\rfrac[2]{{}^{#1}\!/_{#2}}\rfrac{+}{-}$20 percent of the used frequency and do not lose the PLL locking within this range. Thus when there is a need for changing the frequency more than 20 percent, a slow ramp up or down of the VCO is a possibility to change frequency without losing the lock. Another possibility, when e.g. lowering the frequency to the half, is to decrease the frequency by 20 percent for three times and divide it by 2.4 percent in a last step.
 %System manager
 \subsection{System Manager}
 The system manager connects modules for system level functions like the DMA controller or the SD/MMC-controller. Furthermore it contains CSRs to monitor and control functions by software access. The system manager also contains information about boot configurations and defines which bootROM-code to execute. Detailed descriptions of how the system manager works and how the different controllers of the system manager are defined can be found in \cite[chapter 5]{AlteraHPS15}.
 %FPGA manager
 \subsection{FPGA Manager}
-This module of the HPS is used to manage and configure the FPGA of the SoC. For this 32 general-purpose input as well as 32 general-purpose output signals to the FPGA are available. Handshaking is also done using this block when booting the HPS from the FPGA portion. When the FPGA is in user mode it offers registers for low latency communication between FPGA and HPS. The most important function of the FPGA manager is the configuration of the FPGA. When the FPGA is configured by the HPS the only possibility to do this is using the FPGA manager.
+This module of the HPS is used to manage and configure the FPGA of the SoC. For this, 32 general-purpose input as well as 32 general-purpose output signals to the FPGA are available. Handshaking is also done using this block when booting the HPS from the FPGA portion. When the FPGA is in user mode, it offers registers for low latency communication between FPGA and HPS. The most important function of the FPGA manager is the configuration of the FPGA. When the FPGA is configured by the HPS, the only possibility to do this is using the FPGA manager.
 %When the FPGA is in user mode it offers following registers for low latency communication between FPGA and HPS:
 %\begin{itemize}
 %\item \texttt{gpi}: general-purpose input register. The 32 input signals from the FPGA are read from this register.
@@ -188,34 +187,34 @@ This module of the HPS is used to manage and configure the FPGA of the SoC. For 
 For more information about the implementation of the FPGA manager see \cite[chapter 5]{AlteraHPS15}.
 %FPGA-HPS-Bridge
 \subsection{HPS-FPGA-bridges}
-Data exchange between FPGA and HPS is done using bridges. For this reason 3 bridges are implemented in the Altera SoC:
+Data exchange between FPGA and HPS is done using bridges. For this reason, three bridges are implemented in the Altera SoC:
 \begin{itemize}
 \item FPGA-to-HPS-bridge\\
 Masters in the FPGA communicate with slaves in the HPS using this bridge. Peripherals and memory in the HPS can also be accessed when using the FPGA-to-HPS-bridge. While the bridge master interface (connected to the L3 intercconnect)  is fixed to 64 bit width, the bridge slave interface (connected to the FPGA) can be configured to 32 bit, 64 bit or 128 bit width. When the ECC option in the L2 cache is enabled, the width has to be 64 bit. 
 \item HPS-to-FPGA-bridge\\
-THe HPS-to-FPGA bridge provides most masters of the HPS access to logic, peripherals and memory of the FPGA. The master interface is connected to the FPGA portion and has a configurable width of 32, 64 or 128 bit, on the other hand the width of the slave interface of the bridge is fixed to 64 bit. As the HPS-to-FPGA-bridge provides cross clocking it can work independently and asynchrous to the HPS clock in any clock domain. 
+The HPS-to-FPGA bridge provides most masters of the HPS access to logic, peripherals and memory of the FPGA. The master interface is connected to the FPGA portion and has a configurable width of 32, 64 or 128 bit, on the other hand the width of the slave interface of the bridge is fixed to 64 bit. As the HPS-to-FPGA-bridge provides cross clocking, it can work independently and asynchronously to the HPS clock in any clock domain. 
 \item Lightweight HPS-to-FPGA-bridge\\
-This bridge is a HPS-to-FPGA-bridge with lower performance and a fixed master interface width as well as slave interface width of 32 bit. The lightweight HPS-to-FPGA-bridge can be used for low-bandwidth traffic and is useful to take some traffic, like accessing CSRs of soft peripherals, from the HPS-to-FPGA-bridge to this bridge. The overall system performance can be increased significantly using all bridges at optimal capacity usage.
+This bridge is a HPS-to-FPGA-bridge with lower performance and a fixed master interface width as well as slave interface width of 32 bit. The lightweight HPS-to-FPGA-bridge can be used for low-bandwidth traffic and is useful for taking over some traffic, like accessing CSRs of soft peripherals, from the HPS-to-FPGA-bridge. The overall system performance can be increased significantly, using all bridges at optimal capacity usage.
 \end{itemize}
 For implementation details and a technical specification of the bridges see \cite[chapter 8]{AlteraHPS15}.
 \section{Interfaces}
 In this section the most important inferfaces of the Altera Cyclone V SoC are described.
 \subsection{UART}
-UART is a transmission protocol which was developed in the 1960s. UART is highly flexible in the sense that voltages, timing, error checking and flow control can be configured as the application needs. The commonly supported baud rates of UART are 600-921600 baud/s. As the history of UART is quite long some different physical layer standards have been developed, such as RS232C or RS485. Due to this long development history also quite some radiation hardened devices exist, like the Aeroflex DRS4485.\cite{aeroflex14}
+UART is a transmission protocol which was developed in the 1960s. UART is highly flexible in the sense that voltages, timing, error checking and flow control can be configured as the application needs. The commonly supported baud rates of UART are 600-921600 baud/s. As the history of UART is quite long, some different physical layer standards have been developed, such as RS232C or RS485. Due to this long development history, also many radiation hardened devices exist, like the Aeroflex DRS4485.\cite{aeroflex14}
 \subsection{GPIO}
-A GPIO is a digital interface which is made of pins with no dedicated usage. It is possible to configure them flexible during runtime to act as input or output.
+A GPIO is a digital interface which is made of pins with no dedicated usage. It is possible to configure them flexibly during runtime to act as input or output.
 \begin{itemize}
-\item When the pin is configured as input it can read data from a digital circuit
+\item When the pin is configured as input, it can read data from a digital circuit.
 \item A binary signal can be sent to a digital circuit when the pin is configured as output.
 \end{itemize}
 GPIO-pins are available on most SoC and FPGA-devices, in some cases it is possible to configure every pin with no dedicated usage as GPIO-pin.\cite{kernelgpio15}
 \subsection{I$^2$C}
-The I$^2$C-bus was intentionally developed by Philips in the early 1980s to exchange information between ICs located on the same board. This bus is designed for synchronous transmission and is built up of ground, data and clock line. As advantage of this protocol the clock reconstruction possibilities at the receiver has to be mentioned. Furthermore an arbitrary protocol guarantees that only one master exists at one time.\cite{Wue06} I$^2$C defines communication modes as follows:
+The I$^2$C-bus was intentionally developed by Philips in the early 1980s to exchange information between ICs located on the same board. This bus is designed for synchronous transmission and is built up of ground, data and clock line. As advantages of this protocol, the clock reconstruction possibilities at the receiver have to be mentioned. Furthermore an arbitrary protocol guarantees that only one master exists at the same time.\cite{Wue06} I$^2$C defines communication modes as follows:
 \begin{table}
 \begin{center}
 \begin{tabular}{|c||c|c|}
 \hline
-mode & maximum transmission speed & direction\\
+Mode & Maximum transmission speed & Direction\\
 \hline\hline
 standard mode & 100 kbit/s & bidirectional\\
 \hline
@@ -232,29 +231,29 @@ ultra fast mode (UFm) & 5 Mbit/s & unidirectional\\
 \label{tab:rsstates}
 \end{center}
 \end{table}
-As the I$^2$C-bus is inteded to exchange data between ICs the packet size is small. This leads to the fact that high accuracy of the clock is not needed for most applications.\cite{I2Cspeed} Intentionally the I$^2$C-bus was designed for 5V reference voltage. With the release of the specification I$^2$C-2.0 the bus got also the possibility to operate with 2V references.\cite{I2Cvoltage}
+As the I$^2$C-bus is inteded to exchange data between ICs, the packet size is small. This leads to the fact that high accuracy of the clock is not needed for most applications.\cite{I2Cspeed} The I$^2$C-bus was intentionally designed for 5 V reference voltage. With the release of the specification I$^2$C-2.0, the bus got also the possibility to operate with 2 V references.\cite{I2Cvoltage}\\
 More information can be found in the I$^2$C-specification in \cite{I2Cspec}.
 \subsection{CAN}
-The CAN-bus was developed by Bosch in the early 1980s as serial communication protocol for motorized vehicles. In 1994 it became an international standard ISO 11898. The protocol is able to handle bitrates up to 1 Mbit/s and has multi-master capability. That means that different bus members can have master state at different times. CAN is able to handle reference voltages of 5V and 3.3V.\cite{Corrig2008} The CAN-bus uses two signaling lines for communications. As CAN is designed as real time control protocol with a high level of security, it has some important features beside others\cite{boschcan91}:
+The CAN-bus was developed by Bosch in the early 1980s as serial communication protocol for motorized vehicles. In 1994, it became the international standard ISO 11898. The protocol is able to handle bitrates up to 1 Mbit/s and has multi-master capability. That means that different bus members can have master state at different times. CAN is able to handle reference voltages of 5 V and 3.3 V.\cite{Corrig2008} The CAN-bus uses two signaling lines for communication. As CAN is designed as real time control protocol with a high level of security, it has some important features beside others\cite{boschcan91}:
 \begin{itemize}
-\item message priorization
-\item guaranteed latency times
-\item different error detection capabilities
-\item autonomous switching off of defect nodes
+\item message priorization,
+\item guaranteed latency times,
+\item different error detection capabilities, and
+\item autonomous switching off of defect nodes.
 \end{itemize}
 The specification of CAN can be found in \cite{boschcan91}, an even more detailed description in \cite{nxpcan98}.
 \subsection {SPI}
-The serial peripheral interface was introduced by Motorola as bus standard for synchronous full duplex operation. It is built up as master/slave system. The initialization of a data transfer is always done by the master, but data can be sent in both directions. SPI communication is done with 4 signals. In fact SPI is a very simple communication bus with no built in acknoledgement mechanism and no flow control. If those are needed they have to be implemented in additional hardware around or by communication protocols. SPI offers high data rates up to several Mbit/s, with a high potential in single master single slave configurations.\cite{SPI02}
+The serial peripheral interface (SPI) was introduced by Motorola as bus standard for synchronous full duplex operation. It is built up as master/slave system. The initialization of a data transfer is always done by the master, but data can be sent in both directions. SPI communication is done with 4 signals. In fact, SPI is a very simple communication bus with no built in acknowledgement mechanism and no flow control. If these are needed, they have to be implemented in additional hardware around or by communication protocols. SPI offers high data rates up to several Mbit/s, with a high potential in single master single slave configurations.\cite{SPI02}
 \subsection{USB}
-The Universal Serial Bus is a serial communication bus with a speed up to 4Gbit/s. Each bus is controlled by one host and can have up to 127 slaves, which are connected in a star topology. USB uses 4 wires, where two are transferring data using a NRZI encoding scheme, the other two have a DC power of 5V. These voltage is one of the main benefits of USB. Devices connected to an USB bus don't have to have external power supply if the bus is serving enough energy to power the device. A detailed description how USB works can be found in \cite{Pea10}. The full USB specification can be found at \cite{USB16}.
-\section{booting}
-For booting three different configuration options are possible:\cite[chapter A]{AlteraHPS15}
+The Universal Serial Bus (USB) is a serial communication bus with a speed up to 4 Gbit/s. Each bus is controlled by one host and can have up to 127 slaves, which are connected in a star topology. USB uses 4 wires, of which two are transferring data using a NRZI encoding scheme, the other two have a DC power of 5 V. This voltage is one of the main benefits of USB. Devices connected to an USB bus do not have to have external power supply if the bus is serving enough energy to power the device. A detailed description how USB works can be found in \cite{Pea10}. The full USB specification can be found at \cite{USB16}.
+\section{Booting}
+For booting, three different configuration options are possible:\cite[chapter A]{AlteraHPS15}
 \begin{itemize}
-\item The HPS preloader and the FPGA configuration are independent. In this case the FPGA configuration image is loaded from an external source, the HPS preloader is also located externally.
-\item The HPS boots and the FPGA is configured after this by the HPS. The HPS preloader is loaded from an external memory. After the boot of the HPS the FPGA is reset and a configuration image from a flash memory or a communication interface is loaded by the HPS to the FPGA.
-\item The FPGA is configured and the HPS boots from the FPGA portion. For this the FPGA configuration image is loaded from an external source. The FPGA is configured and contains a preloader image for the HPS. When using this initialization option the HPS should not be released from reset state until the FPGA configuration is completed. After the HPS release the HPS preloader image is executed by the BootROM over the FPGA-HPS-bridge.
+\item The HPS preloader and the FPGA configuration are independent. In this case, the FPGA configuration image is loaded from an external source, and the HPS preloader is also located externally.
+\item The HPS boots and the FPGA is configured after this by the HPS. The HPS preloader is loaded from an external memory. After the boot of the HPS, the FPGA is reset and a configuration image from a flash memory or a communication interface is loaded by the HPS to the FPGA.
+\item The FPGA is configured and the HPS boots from the FPGA portion. For this, the FPGA configuration image is loaded from an external source. The FPGA is configured and contains a preloader image for the HPS. When using this initialization option, the HPS should not be released from reset state until the FPGA configuration is completed. After the HPS release, the HPS preloader image is executed by the BootROM over the FPGA-HPS-bridge.
 \end{itemize}
-When the SoC is booted from the HPS, it is done using the boot flow shown in figure \ref{fig:bootstages}.
+When the SoC is booted from the HPS, the boot flow shown in figure \ref{fig:bootstages} is used.
 \begin{figure}[htbp]
 \begin{center}
 \includegraphics[width=13cm,keepaspectratio=true]{bilder/png/bootstages}
@@ -264,15 +263,15 @@ When the SoC is booted from the HPS, it is done using the boot flow shown in fig
 \end{figure}
 \subsection{Reset}
 \begin{itemize}
-\item cold reset\\
-In this case all registers are initialized and the HPS starts executing the BootROM code located at the reset exception address. A cold reset is done whenever the device is booted after a full shutdown.
-\item warm reset\\
-In case of a warm reset some register contents are preserved. In addition the device has the ability to execute a preloader located in the on-chip RAM.
+\item Cold reset\\
+In case of a cold reset, all registers are initialized and the HPS starts executing the BootROM code located at the reset exception address. A cold reset is done whenever the device is booted after a full shutdown.
+\item Warm reset\\
+In case of a warm reset, some register contents are preserved. In addition, the device has the ability to execute a preloader located in the on-chip RAM.
 \end{itemize}
 \subsection{Boot-ROM}
-The boot-ROM is located in the on-chip ROM and performs all actions needed for a basic initialization of the system. It determines the boot source, selected with the \texttt{BSEL}-pins and configures the main PLL clock rate using the \texttt{CSEL}-pins. Furthermore the flash controller is set to default settings. After initialization the boot-ROM jumps to the preloader. Depending on the location of the preloader, the first 4kB of the on-chip RAM are used. When the preloader image is located on a flash device, this memory is reserved as working space for the HPS, otherwise it can be used for user purposes. It has to be noted, that the Boot-ROM is always executed on CPU core 0. After the Boot-ROM has switched the control to the user software (the preloader) the access to the Boot-ROM is disabled.
-\subsubsection{booting from SD/MMC flash devices}
-If the preloader image is stored on a flash device as shown in figure \ref{fig:sdboot}, the first 512 byte of the storage are used as MBR where the start addresses and sizes of the boot images on the device are stored. The images themselfes are stored in a raw partition with no file system (shown as partition A2). As the on-chip RAM-size is limited to 64kB and 4kB are used as working memory (stack, ...) the preloader image has to have a maximum size of 60kB. In case of a failure of the flash device, the Boot-ROM checks the FPGA portion for a bootable fallback image. 
+The boot-ROM is located in the on-chip ROM and performs all actions needed for a basic initialization of the system. It determines the boot source, selected with the \texttt{BSEL}-pins, and configures the main PLL clock rate using the \texttt{CSEL}-pins. Furthermore the flash controller is set to default settings. After initialization, the boot-ROM jumps to the preloader. Depending on the location of the preloader, the first 4 kB of the on-chip RAM are used. When the preloader image is located on a flash device, this memory is reserved as working space for the HPS, otherwise it can be used for user purposes. It has to be noted that the Boot-ROM is always executed on CPU core 0. After the Boot-ROM has switched the control to the user software (the preloader), the access to the Boot-ROM is disabled.
+\subsubsection{Booting from SD/MMC flash devices}
+If the preloader image is stored on a flash device as shown in figure \ref{fig:sdboot}, the first 512 byte of the storage are used as MBR where the start addresses and sizes of the boot images on the device are stored. The images themselves are stored in a raw partition with no file system (shown as partition A2). As the on-chip RAM-size is limited to 64 kB and 4 kB are used as working memory (stack, ...), the preloader image has to have a maximum size of 60 kB. In case of a failure of the flash device, the Boot-ROM checks the FPGA portion for a bootable fallback image. 
 \begin{figure}[htbp]
 \begin{center}
 \includegraphics[width=8cm,keepaspectratio=true]{bilder/png/sdboot}
@@ -281,8 +280,8 @@ If the preloader image is stored on a flash device as shown in figure \ref{fig:s
 \end{center}
 \end{figure}
 \subsection{Preloader}
-The preloader is the first stage of the user software. Therefore the functionality of the preloader image is given by the user. Typical functions include the initialization of interfaces for booting the next software stage and the SDRAM interface. Furthermore the I/O-pins can be configured. The next software stage can be loaded from any interface available to the HPS and, after initialization of the SDRAM, is not limited to 60kB as it is for the on-chip ROM.
+The preloader is the first stage of the user software. Therefore the functionality of the preloader image is given by the user. Typical functions include the initialization of interfaces for booting the next software stage and the SDRAM interface. Furthermore the I/O-pins can be configured. The next software stage can be loaded from any interface available to the HPS and, after initialization of the SDRAM, is not limited to 60 kB as it is for the on-chip ROM.
 \subsection{UBoot-Loader}
-UBoot is an universal bootloader for a variety of devices, especially made for embedded systems. It was invented by DENX in 1999 and available under the GPL. UBoot can be configured using a command line interface, the configuration can be safed to flash devices. Typically the UBoot-loader sets up the device tree, loads the operating system kernel and hands over the user software control to the kernel.
+UBoot is a universal bootloader for a variety of devices, which are made for embedded systems. It was invented by DENX in 1999 and is available under the GPL. UBoot can be configured using a command line interface, the configuration can be safed to flash devices. Typically the UBoot-loader sets up the device tree, loads the operating system kernel and hands over the user software control to the kernel.
 \subsection{Operating System}
-Generally each operating system can be loaded by the HPS as long as some requirements are fulfilled. The boot flow has to be the ability to be configured for the HPS. For this, beside others, drivers and a compiler for the ARM processor have to exist. Due to the fact that for Linux all requirements are fulfilled and the use is free of charge Linux is recommended by the Altera company.
+Generally each operating system can be loaded by the HPS as long as some requirements are fulfilled. The boot flow needs to have the ability to be configured for the HPS. For this, beside others, drivers and a compiler for the ARM processor are required. Due to the fact that all requirements are fulfilled by Linux and the use is free of charge, Linux is recommended by the Altera corporation.
