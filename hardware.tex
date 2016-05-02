@@ -197,31 +197,31 @@ The D-flipflop is the most frequently used flipflop. It can be seen in figure \r
 \end{itemize}
 
 \subsubsection{Timing properties}
-When using flip-flops some timing parameters are important (seen in figure \ref{fig:flipfloptiming}) and explained below.
+When using flip-flops some timing parameters are important:
 \begin{itemize}
-\item setup time $t_{S}$\\
-The setup time is the time the input signal has to be hold constant before the rising clock of the edge occurs to sample the input reliable, using synchronous devices.
-\item hold time $t_{H}$\\
-THe hold time is the duration the input signal has to be hold stable after the rising clock edge occured for a reliable input sampling. $t_{H}$ is a property of synchronous flipflops.
-\item recovery time\\
-The recovery time is like $t_{S}$ for asynchronous flipflops. This is applied, because not every short signal change should have impact on the output. 
-\item removal time\\
+\item Setup time $t_{S}$\\
+The setup time is the time the input signal has to be hold constant before the rising clock of the edge occurs to sample the input reliably, using synchronous devices.
+\item Hold time $t_{H}$\\
+The hold time is the duration the input signal has to be hold stable after the rising clock edge occured for a reliable input sampling. $t_{H}$ is a property of synchronous flipflops.
+\item Recovery time\\
+The recovery time is like $t_{S}$ for asynchronous flipflops. This is applied because not every short signal change should have impact on the output. 
+\item Removal time\\
 The removal time is like the hold time for asynchronous devices.
-\item propagation delay $t_{P}$, $t_{CO}$\\
-The propagation delay is the time the flipflop needs to change the output state after the rising clock edge occured. In some cases the delay times for low-to-high transition is not equal the high-to-low transition time. The propagation delay times are denoted in the datasheets. For correct operation of the flipflop the clock time has to be lower than $t_{S}+t_{H}$.
+\item Propagation delay $t_{P}$, $t_{CO}$\\
+The propagation delay is the time the flipflop needs to change the output state after the rising clock edge occured. In some cases, the delay times for low-to-high transition is not equal to the high-to-low transition time. The propagation delay times are denoted in the datasheets. For correct operation of the flipflop, the clock time has to be lower than $t_{S}+t_{H}$.
 \end{itemize}
 \subsection{Clock}
-In this part some possibilities to generate the clock signal are explained.
+In this part, some possibilities to generate the clock signal are explained.
 \paragraph{Resonant circuit\\}
-The most simple form of generating an oscillating signal is a circuit consisting of a capacitor, inductor and resistor. It oscillates due to the interaction of the magnetic field of the inductor and the electric field of the capacitor. When the capacitor is charged, current flows through the inductor building up a magnetic field. As the capacitor will be decharged the voltage decreases. The magnetic field is a maximum when the capacitor voltage reaches 0. Now the capacitor will start to charge with negative current increasing the electric field while the magnetic field decreases. The circuit starts to oscillate according to Faraday's law. The natural frequency of the oscillation can be determined using
+The most simple form of generating an oscillating signal is a circuit consisting of a capacitor, inductor and resistor. It oscillates due to the interaction of the magnetic field of the inductor and the electric field of the capacitor. When the capacitor is charged, current flows through the inductor building up a magnetic field. As the capacitor will be decharged, the voltage decreases. The magnetic field is a maximum when the capacitor voltage reaches 0. Now the capacitor will start to charge with negative current increasing the electric field while the magnetic field decreases. The circuit starts to oscillate according to Faraday's law. The natural frequency of the oscillation can be determined using
 \begin{equation}
 f_0=2\pi\omega_0
 \end{equation}
 with
 \begin{equation}
-\omega_0=\frac{1}{\sqrt{LC}}
+\omega_0=\frac{1}{\sqrt{LC}}\;.
 \end{equation}
-RLC-circuits are used in many different applications, eg. for tuning radios or as frequency filters. The disadvantages of this type of resonator are the relatively low Q-factor and the fact that resonance frequency is not stable to temperature changes.
+RLC-circuits are used in many different applications, e.g. for tuning radios or as frequency filters. The disadvantages of this type of resonator are the relatively low Q-factor and the fact that resonance frequency is not stable to temperature changes.
 \paragraph{Crystal oscillator\\}
 One of the most important things of oscillators is frequency stability. High stability referring to temperature or changes in the supply voltages is given using quartz crystals. A quartz crystal is a silicon oxide with defined shape and size. Both sides are metallized. When a voltage is applied, a piezo-electric effect occurs and the generated mechanical force leads to electrical charges. As the physical shape can not be changed after production, the frequency stays constant and is inverse proportional to the thickness of the crystal. The symbol of crystal oscillators in electric circuits is shown in figure \ref{fig:crystaloscillatorsymbol}.
 \begin{figure}[htbp]
@@ -232,8 +232,8 @@ One of the most important things of oscillators is frequency stability. High sta
 \end{center}
 \end{figure}
 \paragraph{Phase-locked loop\\}
-A PLL is a system, which allows a signal to stay constant to an external reference clock. A block diagram of a PLL is shown in figure \ref{fig:pllblocks}. As reference clock most times a crystal oscillator is used. The reference clock signal is divided and the phase of this reference signal is compared with the output of the PLL. What the PLL now does is to keep the phase between the two signals constant (as it can be seen in figure \ref{fig:pllphase}). For this the error signal, given by the phase comparator, is lead to a VCO . This signal is divided by another divider and fed back to the phase comparator.\\
-In comparison to other oscillators with variable frequency the long term stability is very high. The dividers can be changed very quickly and so frequency changes can be realized easily. Furthermore the divider values can be configured digitally and so remote modification is possible. As disadvantages higher phase noise and the complexity of the systems have to be mentioned.
+A phase-locked loop is a system which allows a signal to stay constant to an external reference clock. A block diagram of a PLL is shown in figure \ref{fig:pllblocks}. As reference clock, most times a crystal oscillator is used. The reference clock signal is divided and the phase of this reference signal is compared with the output of the PLL. The PLL now keeps the phase between the two signals constant (as it can be seen in figure \ref{fig:pllphase}). For this, the error signal, given by the phase comparator, is lead to a VCO . This signal is divided by another divider and fed back to the phase comparator.\\
+In comparison to other oscillators with variable frequency, the long term stability is very high. The dividers can be changed very quickly and so frequency changes can be realized easily. Furthermore the divider values can be configured digitally and so remote modification is possible. As disadvantages, higher phase noise and the complexity of the systems have to be mentioned.
 \begin{figure}[htbp]
 \begin{center}
 \includegraphics[width=12cm,keepaspectratio=true]{bilder/png/PLLblocks}
