@@ -1,6 +1,6 @@
 \chapter{Altera Cyclone V SoC}
 \label{kap:alteracyclone}
-Altera was founded in 1983 and developed their first FPGA in 1992.\cite{althist16} The Altera Cyclone V was developed to decrease time-to-market and cost requirements, simultaneously the power consumption is decreased. Cyclone V devices are made in 28nm technology and have a core volage of 1.1V. The 10kB memory blocks have a built in soft ECC.\cite{altcycvov15}\\
+The corporation Altera was founded in 1983 and developed its first FPGA in 1992.\cite{althist16} The Altera Cyclone V was developed to decrease time-to-market and cost requirements, simultaneously the power consumption was decreased. Cyclone V devices are made in 28 nm technology and have a core volage of 1.1 V. The 10 kB memory blocks have a built in soft ECC.\cite{altcycvov15}\\
 The Cyclone V SoC is built up of a FPGA and a dual-core ARM Cortex HPS. Both portions are connected using a FPGA-HPS-bridge. A high-level structural block diagram of the SoC device is shown in figure \ref{fig:alterasocblocks}. The HPS is connectable to a wide set of peripherals and supports symmetric and asymmetric multiprocessing.
 \begin{figure}[htbp]
 \begin{center}
@@ -11,14 +11,14 @@ The Cyclone V SoC is built up of a FPGA and a dual-core ARM Cortex HPS. Both por
 \end{figure}
 %FPGA Field Programmable Gate Array
 \section{FPGA}
-The FPGA portion of the Altera SoC is made for logic operations and high speed calculations, especially of matrices. Generally it can be said, that everything which can be defined by the FPGA block layout is implementable. So also interfaces like SPI or I$^2$C can be implemented in the FPGA. A FPGA consists of some main building blocks, which  are described below.
+The FPGA portion of the Altera SoC is made for logic operations and high speed calculations, especially of matrices. Generally it can be said that everything which can be defined by the FPGA block layout can be implemented. Hence also interfaces like SPI or I$^2$C can be implemented in the FPGA. An FPGA consists of some main building blocks, which are described below.
 \subsection{Logic Array Blocks (LAB)}
-LABs are basic building blocks, each consisting of 10 adaptive logic modules (ALM). They are freely configurable to build up logic functions, arithmetic or register functions. A quarter of the LABs is configurable as memory (MLAB), which is described in chapter \ref{chap:embmem}. LABs can drive the own ALMs as well as the 20 ALMs of the adjacent LABs. The ALMs of one LAB can be driven by the own LAB and by DSP blocks using the direct link connection of the local interconnect. A ALM contains 4 registers, each having data, clock, clear and synchronous load ports. The ALMs of the Cyclone V device can operate in 4 different operating modes\cite[chapter 1]{AlteraFPGA15}:
+LABs are basic building blocks, each consisting of 10 adaptive logic modules (ALM). They are freely configurable to build up logic functions, arithmetic or register functions. A quarter of the LABs is configurable as memory (MLAB), which is described in chapter \ref{chap:embmem}. LABs can drive the own ALMs as well as the 20 ALMs of the adjacent LABs. The ALMs of one LAB can be driven by their own LAB and by DSP blocks using the direct link connection of the local interconnect. An ALM contains 4 registers, each having data, clock, clear, and synchronous load ports. The ALMs of the Cyclone V device can operate in 4 different operating modes\cite[chapter 1]{AlteraFPGA15}:
 \begin{itemize}
-\item normal mode\\
-In this mode up to 8 inputs from the local interconnect can be use to build up two functions with 4 inputs or one function with up to 6 inputs in one ALM. 
-\item extended LUT mode\\
-In this mode functions with 7 inputs can be implemented, if they fit into a template shown in figure \ref{fig:extendedlutfigure}. In HDLs those functions are often designed as if/else-statements.
+\item Normal mode\\
+In normal mode, up to 8 inputs from the local interconnect can be used to build up two functions with 4 inputs or one function with up to 6 inputs in one ALM. 
+\item Extended LUT mode\\
+In extended LUT mode, functions with 7 inputs can be implemented, if they fit into a template shown in figure \ref{fig:extendedlutfigure}. In HDLs, these functions are often designed as if/else-statements.
 \begin{figure}[htbp]
 \begin{center}
 \includegraphics[width=10cm,keepaspectratio=true]{bilder/png/extendedlutfigure}
@@ -26,29 +26,29 @@ In this mode functions with 7 inputs can be implemented, if they fit into a temp
 \label{fig:extendedlutfigure}
 \end{center}
 \end{figure}
-\item arithmetic mode\\
-In the arithmetic mode two dedicated full adders are available to perform pre-adder logic by the LUTs. Additional two functions with 4 inputs can be implemented, and the results of those functions added using the full adders.
-\item shared arithmetic mode\\
-In this mode a adder with three inputs can be implemented. The ALM is configured with 4 input LUTs, each LUT computes the sum of three inputs.
+\item Arithmetic mode\\
+In the arithmetic mode, two dedicated full adders are available to perform pre-adder logic by the LUTs. Two additional functions with 4 inputs can be implemented, and the results of these functions can be added using the full adders.
+\item Shared arithmetic mode\\
+In the shared arithmetic mode, an adder with three inputs can be implemented. The ALM is configured with 4 input LUTs, with each LUT computing the sum of three inputs.
 \end{itemize}
 \subsection{Embedded Memory}
 \label{chap:embmem}
-A Cyclone V device has two different kinds of embedded memory which are 10kB blocks (called M10K) for providing memory for larger arrays and MLABs with 640 bit memory for smaller memory arrays. MLABs are optimized for implementing shift registers used by DSPs. The embedded memory of the Cyclone V device supports different memory modes:
+A Cyclone V device has two different kinds of embedded memory: 10 kB blocks (called M10K) for providing memory for larger arrays, and MLABs with 640 bit memory for smaller memory arrays. MLABs are optimized for implementing shift registers used by DSPs. The embedded memory of the Cyclone V device supports different memory modes:
 \begin{itemize}
-\item single-port RAM\\
+\item Single-port RAM\\
 The single-port RAM mode supports only one read or write operation at one specific time.
-\item simple dual-port RAM\\
-In this mode one read and one write operation can be done at a time, when the read and write operation is done on different ports.
-\item true dual-port RAM\\
-In this mode all combinations of read/write at two ports can be done. This includes two read operations, two write operations or one write and one read operation on two ports at different frequencies. This mode is only supported by M10K memory blocks.
-\item shift register\\
-Logic cells and routing ressources for DSPs (like FIR, correlation functions or pseudo random number generators) can be implemented in this mode. Memory blocks can be cascaded to implement larger shift registers.
+\item Simple dual-port RAM\\
+In this mode, one read and one write operation can be done at the same time, if the read and write operation is done on different ports.
+\item True dual-port RAM\\
+In this mode, all combinations of read/write at two ports can be done. This includes two read operations, two write operations or one write and one read operation on two ports at different frequencies. This mode is only supported by M10K memory blocks.
+\item Shift register\\
+Logic cells and routing ressources for DSPs (like FIR, correlation functions, or pseudo random number generators) can be implemented in shift register mode. Memory blocks can be cascaded to implement larger shift registers.
 \item ROM\\
-An embedded memory block can be used as ROM as well. This is similar to the single-port mode, disabling the possibility for write operations. The data is loaded in the memory using .mif or .hex-files.
+An embedded memory block can be used as ROM as well. This is similar to the single-port mode, disabling the possibility for write operations. The data is loaded into the memory using .mif or .hex-files.
 \item FIFOs\\
-FIFO buffers can be implemented using either M10K or MLAB memory cells. For smaller FIFOs MLABs are ideal for implementation, but mixed-width FIFOs are not supported using MLABs.
+FIFO buffers can be implemented using either M10K or MLAB memory cells. For smaller FIFOs, MLABs are ideal for implementation, but mixed-width FIFOs are not supported using MLABs.
 \end{itemize}
-More information on embedded memory modes and clocking is available in \cite[chapter 2]{AlteraFPGA15}
+More information on embedded memory modes and clocking is available in \cite[chapter 2]{AlteraFPGA15}.
 \subsection{Digital Signal Processing}
 The Altera Cyclone V SoC contains some built-in DSP blocks for efficient signal processing. A block diagram of the used DSP architecture built is shown in figure \ref{fig:fpgadsp}.
 \begin{figure}[htbp]
