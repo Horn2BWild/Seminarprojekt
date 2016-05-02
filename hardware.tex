@@ -65,10 +65,10 @@ The components of a microprocessor are connected by buses. Information is exchan
 \label{fig:microprocessorblockdiagram}
 \end{center}
 \end{figure}
-\subsection{ASIC - Application Specific Integrated Circuit}
-ASICs are ICs which are designed for a specific purpose. Examples for those ICs are control systems for washing machines, graphic card accelerators or network interface chips. ASICs are typically faster than FPGAs or multi purpose processors as they are specialized for one specific usage and the chip are is very low compared to other types. But as disadvantage manufacturing is expensive, because the masks for the waver production have to be made for every single chip design. In that way the manufacturing process for ASICs is only suitable for mass production, where one chip design is used for thousands of devices.
-\subsection{FPGA - Field-Programmable Gate Array}
-In comparison to ASICs the FPGA can be programmed for different applications after delivery. The programming is done by combining a large number of logic blocks (CLB, LAB) and lookup tables (LUTs) through configurable bus connections. As FPGAs are reprogrammable, a design change in very late design phases is possible, even over remote connections. A general structure of a FPGA can be seen in figure \ref{fig:fpgablocksgeneral}. A FPGA is programmed using a HDL (see section \ref{kap:HDL}).
+\subsection{Application Specific Integrated Circuit - ASIC}
+ASICs are ICs which are designed for a specific purpose. Examples for those ICs are control systems for washing machines, graphic card accelerators or network interface chips. ASICs are typically faster than FPGAs or multi purpose processors as they are specialized for one specific usage. However, a disadvantage of ASICs is that manufacturing is expensive because the masks for the waver production have to be manufactured for every single chip design. In that way the manufacturing process for ASICs is only suitable for mass production, where one chip design is used for thousands of devices.
+\subsection{Field-Programmable Gate Array - FPGA}
+In comparison to ASICs, the FPGA can be programmed for different applications after delivery. The programming is done by combining a large number of logic blocks (CLB, LAB) and lookup tables (LUTs) through configurable bus connections. As FPGAs are reprogrammable, a design change in very late design phases is possible, even over remote connections. A general structure of an FPGA can be seen in figure \ref{fig:fpgablocksgeneral}. An FPGA is programmed using an HDL (see section \ref{kap:HDL}).
 \begin{figure}[htbp]
 \begin{center}
 \includegraphics[width=14cm,keepaspectratio=true]{bilder/png/fpgablocksgeneral}
@@ -77,7 +77,7 @@ In comparison to ASICs the FPGA can be programmed for different applications aft
 \end{center}
 \end{figure}
 \subsubsection{SRAM-based devices}
-The most common FPGA type is SRAM-based. SRAM cells are typically made of 4 to 6 MOSFET transistors (but also special factoring types with up to 10 transistors exist). The transistors are connected as bistable flipflops to store each bit. A typical SRAM cell is shown in figure \ref{fig:SRAMaufbau}. So those devices are volatile and have to be programmed each time they are powered up. As they can be programmed further and further again they are suitable for prototyping and updating the configuration. As disadvantages it has to be mentioned that SRAM-based devices are more sensitive to radiation and therefore they need additional shielding. Furthermore, due to the physical design they need more space and so less space for logic arrays is available.\cite{Maxfield2009}\\
+The most common FPGA type is SRAM-based. SRAM cells are typically made of 4 to 6 MOSFET transistors (but there are also special factoring types with up to 10 transistors). The transistors are connected as bistable flipflops to store each bit. A typical SRAM cell is shown in figure \ref{fig:SRAMaufbau}. So these devices are volatile and have to be programmed each time they are powered up. As they can be programmedover and over again, they are suitable for prototyping and updating the configuration. However, the following disadvantages have to be mentioned: SRAM-based devices are more sensitive to radiation and therefore they need additional shielding. Furthermore, due to the physical design they need more space and consequently there is less space available for logic arrays.\cite{Maxfield2009}\\
 \begin{figure}[htbp]
 \begin{center}
 \includegraphics[width=8cm,keepaspectratio=true]{bilder/png/SRAMaufbau}
@@ -86,17 +86,17 @@ The most common FPGA type is SRAM-based. SRAM cells are typically made of 4 to 6
 \end{center}
 \end{figure}
 \subsubsection{Antifuse-based devices}
-Antifuse-based devices are OTP. The programming is done with special programming devices. For manufacturing those devices special materials, eg. non-conducting amorphous silicon, are used.\cite{Zeif2011} When antifuse-based devices are programmed, conducting channels are made by high voltage. This can be seen in figure \ref{fig:antifusevorhernachher}. So when antifuse-based FPGAs are programmed the configuration is permanent. This leads to the fact that the configuration of the device is non-volatile and available at power-on. The configuration can be hidden due to special security antifuses. Due to the fact that the device is OTP, no additional memory is needed to store the configuration. The disadvantage of this device is that it can be programmed only once and so it is not suitable for prototyping or changing configurations. Furthermore the programming can only be done off-line.\\
-Antifuse-based configurations are radiation hard and therefore suitable for military or space environments.\cite{Maxfield2009} It must be pointed out, that only the configuration is naturally radiation hard, and attached components have to be made radiation hard (shielding, TRD) as well. As antifuses need more manufacturing steps than SRAM-based devices, antifuse-based devices are some technology generations behind.
+Antifuse-based devices are OTP. The programming is done with special programming devices. For manufacturing these devices, special materials, eg. non-conducting amorphous silicon, are used.\cite{Zeif2011} When antifuse-based devices are programmed, conducting channels are made by high voltage. This can be seen in figure \ref{fig:antifusevorhernachher}. Thus when antifuse-based FPGAs are programmed, the configuration is permanent. This leads to the fact that the configuration of the device is non-volatile and available at power-on. The configuration can be hidden due to special security antifuses. Because of the fact that the device is OTP, no additional memory is needed to store the configuration. The disadvantage of this device is that it can be programmed only once and as a result it is not suitable for prototyping or changing configurations. Furthermore the programming can only be done off-line.\\
+Antifuse-based configurations are radiation hard and therefore suitable for military or space environments.\cite{Maxfield2009} It must be pointed out that only the configuration is naturally radiation hard, and attached components have to be made radiation hard (shielding, TRD) as well. As antifuses need more manufacturing steps than SRAM-based devices, antifuse-based devices are some technology generations behind.
 \begin{figure}[htbp]
 \begin{center}
 \includegraphics[width=10cm,keepaspectratio=true]{bilder/png/antifusevorhernachher}
-\caption{An unprogrammed (left) vs programmed (right) antifuse cell \cite{Qui16}}
+\caption{Scanning Electron Micrograph (SEM) of an unprogrammed (left) vs programmed (right) antifuse cell \cite{Qui16}}
 \label{fig:antifusevorhernachher}
 \end{center}
 \end{figure}
 \subsubsection{Flash-based devices}
-Flash-based devices can be electrically programmed and erased, so that they can be configured over and over again. This can be done offline or online via special programming interfaces (in-circuit programmable). The memory is non-volatile and so the configuration can be stored even after power-off. As disadvantages the relatively high static power consumption\cite{Qui16} as well as device altering due to programming cycles have to bementioned. Flash-based devices contain a large number of flash-cells, which use two floating-gate transistors for storing data. A floating-gate transistor can be seen in figure \ref{fig:FlashTransistor}\\
+Flash-based devices can be electrically programmed and erased so that they can be configured over and over again. This can be done offline or online via special programming interfaces (in-circuit programmable). The memory is non-volatile and so the configuration can be stored even after power-off. As disadvantages the relatively high static power consumption\cite{Qui16} as well as device altering due to programming cycles have to be mentioned. Flash-based devices contain a large number of flash-cells, which use two floating-gate transistors for storing data. A floating-gate transistor can be seen in figure \ref{fig:FlashTransistor}.\\
 \textit{The floating-gate is isolated, insulated all around by an oxide layer, with no electrical contacts. This means that any electrons placed on the floating-gate are literally trapped until removed. This persistence is the foundation for using flash memory as storage.}\cite{Flash16}\\
 A detailed description of the operating of floating-gate transistors can be found at \cite{Cse16}.\\
 
@@ -111,20 +111,20 @@ A detailed description of the operating of floating-gate transistors can be foun
 In this section some important hardware elements are explained.
 \subsection{Flip-flops}
 \label{ch:flipflops}
-Flipflops are basic logic elements with 2 stable states. They consist of a data input and a clock input, as well as a data output. Optionally a set/reset-pin or an inverted output can be available. Fliipflops are used as memory elements. Simplified, a logical state at the data input is stored at the rising edge of the clock signal, and held stable to the output until the next rising edge occures. The most used flipflop is the D-flipflop.
+Flipflops are basic logic elements with 2 stable states. They consist of a data input and a clock input, as well as a data output. Optionally a set/reset-pin or an inverted output can be available. Flip-flops are used as memory elements. Simplified, a logical state at the data input is stored at the rising edge of the clock signal and held stable to the output until the next rising edge occures. The most used flipflop is the D-flipflop.
 \begin{figure}
 \begin{center}
     \subfigure[RS-flipflop]{\includegraphics[width=2.5cm,keepaspectratio=true]{bilder/png/RSflipflop}\label{fig:rsflipflop}}
     \subfigure[JK-flipflop]{\includegraphics[width=2.5cm,keepaspectratio=true]{bilder/png/JKflipflop}\label{fig:jkflipflop}}
     \subfigure[T-flipflop]{\includegraphics[width=2.5cm,keepaspectratio=true]{bilder/png/Tflipflop}\label{fig:tflipflop}}
     \subfigure[D-flipflop]{\includegraphics[width=2.5cm,keepaspectratio=true]{bilder/png/Dflipflop}\label{fig:dflipflop}}   
-\caption{logic blocks of different flipflop types}
+\caption{Logic blocks of different flipflop types}
 \end{center}
 \end{figure}
 
 \begin{itemize}
 \item RS-flipflop\\
-The RS-flipflop, which can be seen in figure \ref{fig:rsflipflop}, is the most simple form of a flipflop. It consists of a set and a reset input. The state change is asynchrously and therefore not depending on rising clock edges. 
+The RS-flipflop, which can be seen in figure \ref{fig:rsflipflop}, is the most simple form of a flipflop. It consists of a set and a reset input. The state change is asynchronous and therefore not depending on rising clock edges. 
 
 \begin{table}
 \begin{center}
@@ -146,12 +146,12 @@ S &  R & $Q_{t+1}$\\
 \end{center}
 \end{table}
 
-The different state transitions of a RS-flipflop are listed in table \ref{tab:rsstates}. As long as the R and S bits are set to low state the output is held constant at the previous state. When the reset bit is set the output is changed to 0, when the set bit is set to 1, Q changes to 1. When R as well as S are both set, the output is simultaneously forced to get low and high. In this metastable state the next state is undefined and is dependent on factoring characterizations.
+The different state transitions of a RS-flipflop are listed in table \ref{tab:rsstates}. As long as the R and S bits are set to low state, the output is held constant at the previous state. When the reset bit is set, the output is changed to 0; when the set bit is set to 1, Q changes to 1. When R as well as S are both set, the output is simultaneously forced to get low and high. In this metastable state, the next state is undefined and is dependent on factoring characterizations.
 
 \item RES-flipflop\\
-In addition to the simple RS-flipflop this type has an enable input. This causes state changes to only occur when the enable bit is set. The advantage of this configuration is that state changes due to inconsistencies on the input lines. Even though the RES-flipflop has an enable pin it is still an asynchronous device.
+In addition to the simple RS-flipflop, this type has an enable input. This causes state changes to only occur when the enable bit is set. The advantage of this configuration is that state changes due to inconsistencies on the input lines. Even though the RES-flipflop has an enable pin, it is still an asynchronous device.
 \item JK-flipflop\\
-The JK-flipflop (shown in figure \ref{fig:jkflipflop} is like a universal flipflop. It can be configured as RS-flipflop D-flipflop as well as a T-flipflop. The state transitions can be found in table \ref{tab:jkstates}. The transitions are like the RS transitions, but as difference the J=K=1 state is interpreted as toggle state.
+The JK-flipflop (shown in figure \ref{fig:jkflipflop} is like a universal flipflop. It can be configured as RS-flipflop, D-flipflop, as well as T-flipflop. The state transitions can be found in table \ref{tab:jkstates}. The transitions are like the RS transitions, but in contrast to them, the J=K=1 state is interpreted as toggle state.
 
 \begin{table}
 \begin{center}
@@ -174,7 +174,7 @@ J &  K & $Q_{t+1}$\\
 \end{table}
 
 \item T-flipflop\\
-The T-flipflop as shown in figure \ref{fig:tflipflop} performs no state transition as long as the T-input is set low. When it is set to 1 the flipflop starts to toggle, the next state will be set to the inverse of the current state, corresponding to the clock rate. The state transitions are listed in table \ref{tab:tstates}.
+The T-flipflop as shown in figure \ref{fig:tflipflop} performs no state transition as long as the T-input is set low. When it is set to 1, the flipflop starts to toggle, the next state will be set to the inverse of the current state, corresponding to the clock rate. The state transitions are listed in table \ref{tab:tstates}.
 \begin{table}
 \begin{center}
 \begin{tabular}{|c||c|}
@@ -192,7 +192,7 @@ T & $Q_{t+1}$\\
 \end{table}
 
 \item D-flipflop\\
-The D-flipflop is the most used flipflop.It can be seen in figure \ref{fig:dflipflop}. The D-flipflop reads the D input at the rising edge of the clock and is therefore a synchronous device. The output is set to the D input at the rising edge and held stable at any other time. In this way the D-flipflop can be seen as simple memory cell
+The D-flipflop is the most frequently used flipflop. It can be seen in figure \ref{fig:dflipflop}. The D-flipflop reads the D input at the rising edge of the clock and is therefore a synchronous device. The output is set to the D input at the rising edge and held stable at any other time. In this way the D-flipflop can be seen as simple memory cell.
 
 \end{itemize}
 
