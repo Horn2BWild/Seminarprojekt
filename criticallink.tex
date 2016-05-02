@@ -58,53 +58,53 @@ The Altera Cyclone V SoC contains some built-in DSP blocks for efficient signal 
 \label{fig:fpgadsp}
 \end{center}
 \end{figure}
-The DSP exists of following main components:
+The DSP consists of following main components:
 \begin{itemize}
 \item Input register bank\\
 The positive edge-triggered input register bank consists of data, dynamic control signals, and two sets of delay registers. The delay registers can be used to fulfill latency requirements.
 \item Pre-adder\\
-In each DSP block exist two 19 bit pre-adders, which can be used either independent or combinend as one 27bit pre-adder.
+In each DSP block, there are two 19 bit pre-adders, which can be used either independently or combined as one 27 bit pre-adder.
 \item Internal coefficient\\
-For multiplications the multiplicand can be given in two ways. It can be read from the dynamic input or the internal coefficient. This internal coefficient supports up to 8 different coefficients.
+For multiplications, the multiplicand can be given in two ways. It can be read from the dynamic input or the internal coefficient. This internal coefficient supports up to 8 different coefficients.
 \item Multipliers\\
-One reason for using DSPs is the high performance of calculating huge amounts of data, especially given in matrizes. Due to this each DSP block has two multipliers for performing many multiplications in parallel. The multipliers can be configured in following operation modes:
+One reason for using DSPs is the high performance of calculating huge amounts of data, especially given in matrices. Due to this, each DSP block has two multipliers for performing many multiplications in parallel. The multipliers can be configured in following operation modes:
 \begin{itemize}
-\item 1 27x27 multiplier
-\item 2 18x19 multipliers
-\item 3 9x9 multipliers
+\item 1 27$\times$27 multiplier
+\item 2 18$\times$19 multipliers
+\item 3 9$\times$9 multipliers
 \end{itemize}
 \item Adder\\
-The adder can be used as one 64bit adder, two 18x19 adders or three 9x9 adders, depending on the operational mode.
+The adder can be used as one 64 bit adder, two 18$\times$19 adders or three 9$\times$9 adders, depending on the operational mode.
 \item Accumulator and chainout adder\\
-The accumulator supports double accumulation in the 64bit mode and is not available in the 18x19 mode as well as the 9x9 mode. The accumulation registers are set statically in the programming file. 
+The accumulator supports double accumulation in the 64 bit mode and is neither available in the 18$\times$19 mode nor in the 9$\times$9 mode. The accumulation registers are set statically in the programming file. 
 \item Systolic registers\\
 The systolic registers are used to register the 18/19-bit inputs of the upper multiplier and to delay the chainout output to the next DSP block. It is used only in the systolic FIR mode and bypassed in all other modes. 
 \item Output register bank
 \end{itemize}
 \subsubsection{DSP operation modes}
-In this part some important DSP operation modes of the built-in DSP block are described. Detailed block diagrams of the different operation modes can be found in \cite[chapter 3]{AlteraFPGA15}.
+In this part, some important DSP operation modes of the built-in DSP block are described. Detailed block diagrams of the different operation modes can be found in \cite[chapter 3]{AlteraFPGA15}.
 \paragraph{Independent multiplier mode}
-In this mode individual multiplication operations for general purpose multipliers are done. Following configurations can be used: 9x9, 18x18, 18x19, 18x25, 20x24 and 27x27.
+In this mode, individual multiplication operations for general purpose multipliers are done. The following configurations can be used: 9$\times$9, 18$\times$18, 18$\times$19, 18$\times$25, 20$\times$24 and 27$\times$27.
 \paragraph{Independent complex multiplier mode}
-The DSP also supports multiplication of complex numbers. This is available for 18x19 numbers and is done using the equation
+The DSP also supports multiplication of complex numbers. This is available for 18$\times$19 numbers and is done using the equation
 \begin{equation}
-(a+jb)\cdot (c+jd)=[(a\cdot c)-(b\cdot d)]+j[(a\cdot d)+(b\cdot d)]
+(a+jb)\cdot (c+jd)=[(a\cdot c)-(b\cdot d)]+j[(a\cdot d)+(b\cdot d)].
 \end{equation}
-For the calculation 2 DSP blocks are used, one for calculating the real part, the other one for the calculation of the imaginary part.
+For the calculation, two DSP blocks are used, one for calculating the real part, the other one for the calculation of the imaginary part.
 \paragraph{Systolic FIR mode}
-FIR filters have a impulse response which goes to zero in finite time. In comparison to IIR filters they have some useful properties:
+FIR filters have an impulse response which goes to zero in finite time. In comparison to IIR filters, they have some useful properties:
 \begin{itemize}
-\item stability: As the number of inputs is limited, also the ouput of the filter has a limited value.
-\item no need for feedback
-\item can be designed to have linear phase.
+\item Stability: as the number of inputs is limited, also the ouput of the filter has a limited value.
+\item No need for feedback.
+\item Can be designed to have a linear phase.
 \end{itemize}
-Those properties make FIR filters good suitable especially for phase-sensitive applications like data communications. For this reason an own FIR mode is built-in in the DSP blocks. The FIR filter output is calculated using the following formula:
+Because of these properties, FIR filters are well suited, especially for phase-sensitive applications like data communications. For this reason, a dedicated FIR mode is built-in in the DSP blocks. The FIR filter output is calculated using the following formula:
 \begin{equation}
-y[n]=\sum_{i=1}^{k}c[i]x[n-i-1]
+y[n]=\sum_{i=1}^{k}c[i]x[n-i-1]\;.
 \end{equation}
-As the delay can become large with an increasing number of additions, a systolic form of the equation is used to overcome this delay. For this additional delay elements are inserted to increase the calculation performance at the cost of increased latency. FIR calculations can be done using either 18 or 27 bit.
-\subsection{Power Considerations}
-It should be ensured that the read-enable signal is only set when necessary. When no read-during write is needed, the read-enable signal should be disabled. Due to this read operations occur less often and the AC power consumption can be lowered significantly when this is applied to each memory block.\cite[chapter 1]{AlteraFPGA15} Generally, when using the system in a power-critical environment like in space, it should be noted that when using the FPGA the overall power consumption is higher than when using only the HPS. So in that way the tradeoff between the higher calculation speed for specific purposes and the higher power consumption of the system should be compared.
+As the delay can become large with an increasing number of additions, a systolic form of the equation is used to overcome this delay. For this additional delay, elements are inserted to increase the calculation performance at the cost of increased latency. FIR calculations can be done using either 18 or 27 bit.
+\subsection{Considerations regarding power}
+It should be ensured that the read-enable signal is only set when necessary. When no read-during write is needed, the read-enable signal should be disabled. Due to this, read operations occur less often and the AC power consumption can be lowered significantly when this is applied to each memory block.\cite[chapter 1]{AlteraFPGA15} Generally, when using the system in a power-critical environment like in space, it should be noted that when using the FPGA, the overall power consumption is higher than when using only the HPS. Accordingly, the tradeoff between higher calculation speed for specific purposes and higher power consumption of the system should be compared.
 %HPS Hard Processor System
 \section{HPS}
 One of the main parts of the Altera SoC is the hard processor system (HPS). It offers a microprocessor system for general purpose use. For procesing a dual-core processor is used. A main task of the HPS is to connect to peripherals. Also the connection to the FPGA portion is done and controlled using the HPS. The speed of the HPS is not only depending on the clock frequency of the MPU core, but also from cache speed and the speed of the data flow generating input for the MPU core. The main parts of the HPS, shown in figure \ref{fig:alterahpsblocks}, are described below.
